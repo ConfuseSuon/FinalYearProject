@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { Logo } from '../../assets/img';
-import InputField from '../../ResuableComponents/InputField';
-import { baseUrl, doDelete, doGet, doPost } from '../../Services/Axios';
-import { useForm } from '../../Services/useForm';
-import NavBar from '../Header/NavBar';
-import SideBar from '../Header/SideBar';
-import SwitchHC from '../Header/SwitchHC';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import InputField from "../../ResuableComponents/InputField";
+import { baseUrl, doDelete, doGet, doPost } from "../../Services/Axios";
+import { useForm } from "../../Services/useForm";
+import { Logo } from "../../assets/img";
+import NavBar from "../Header/NavBar";
+import SideBar from "../Header/SideBar";
+import SwitchHC from "../Header/SwitchHC";
 
 const HotelDetails = () => {
   const [hotels, setHotels] = useState([]);
@@ -16,26 +16,26 @@ const HotelDetails = () => {
   const [review, setReview] = useState(false);
   const [hotelImages, setHotelImages] = useState([]);
   const { handleChange, states } = useForm({
-    name: '',
-    location: '',
-    description: '',
-    type: 'Twin',
+    name: "",
+    location: "",
+    description: "",
+    type: "Twin",
   });
 
   const handleSubmit = async () => {
     try {
       const formData = new FormData();
       Array.from(hotelImages).map((item) =>
-        formData.append('hotelImage', item)
+        formData.append("hotelImage", item)
       );
-      formData.append('review_permission', review);
-      formData.append('hotel_features', ammenities);
-      formData.append('name', states.name);
-      formData.append('location', states.location);
-      formData.append('description', states.description);
-      formData.append('type', 'Twin');
-      const response = await doPost('/hotel/admin', formData);
-      toast.success('Hotel insert success!!!');
+      formData.append("review_permission", review);
+      formData.append("hotel_features", ammenities);
+      formData.append("name", states.name);
+      formData.append("location", states.location);
+      formData.append("description", states.description);
+      formData.append("type", "Twin");
+      const response = await doPost("/hotel/admin", formData);
+      toast.success("Hotel insert success!!!");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
@@ -52,12 +52,12 @@ const HotelDetails = () => {
   };
   const fetchHotels = async () => {
     try {
-      const response = await doGet('/hotel/all');
+      const response = await doGet("/hotel/all");
       setHotels(response.data);
     } catch (error) {
-      console.log('====================================');
+      console.log("====================================");
       console.log(error);
-      console.log('====================================');
+      console.log("====================================");
     }
   };
   useEffect(() => {
@@ -68,9 +68,9 @@ const HotelDetails = () => {
       const response = await doDelete(`hotel/${id}`);
       setRefresh((prev) => !prev);
     } catch (error) {
-      console.log('====================================');
+      console.log("====================================");
       console.log(error);
-      console.log('====================================');
+      console.log("====================================");
     }
   };
   return (
@@ -87,7 +87,7 @@ const HotelDetails = () => {
         </div>
         <div className="mx-auto mb-8 flex h-32 w-fit flex-col justify-center rounded-md bg-[#F5F5F5] p-3 px-5 py-2 sm:px-20">
           <input
-            type={'file'}
+            type={"file"}
             name="hotelImages"
             onChange={(e) => setHotelImages(e.target.files)}
             multiple={true}
@@ -101,7 +101,7 @@ const HotelDetails = () => {
             name="name"
             id="name"
             title="Name"
-            customStyle={{ width: '40%', gap: '5px' }}
+            customStyle={{ width: "40%", gap: "5px" }}
             handleChange={handleChange}
           />
           <InputField
@@ -110,7 +110,7 @@ const HotelDetails = () => {
             name="location"
             id="fname"
             title="location"
-            customStyle={{ width: '40%', gap: '5px' }}
+            customStyle={{ width: "40%", gap: "5px" }}
             handleChange={handleChange}
           />
           <InputField
@@ -120,7 +120,7 @@ const HotelDetails = () => {
             id="name"
             title="Description"
             handleChange={handleChange}
-            customStyle={{ width: '100%', gap: '5px' }}
+            customStyle={{ width: "100%", gap: "5px" }}
           />
         </div>
 
@@ -159,7 +159,7 @@ const HotelDetails = () => {
             <input
               type="checkbox"
               name="option1"
-              value={'Free Wifi'}
+              value={"Free Wifi"}
               onChange={(e) =>
                 setAmmenities((prev) => [...prev, e.target.value])
               }
@@ -170,7 +170,7 @@ const HotelDetails = () => {
             <input
               type="checkbox"
               name="option1"
-              value={'Pool'}
+              value={"Pool"}
               onChange={(e) =>
                 setAmmenities((prev) => [...prev, e.target.value])
               }
@@ -181,7 +181,7 @@ const HotelDetails = () => {
             <input
               type="checkbox"
               name="option1"
-              value={'Bar'}
+              value={"Bar"}
               onChange={(e) =>
                 setAmmenities((prev) => [...prev, e.target.value])
               }
@@ -192,7 +192,7 @@ const HotelDetails = () => {
             <input
               type="checkbox"
               name="option1"
-              value={'Kids'}
+              value={"Kids"}
               onChange={(e) =>
                 setAmmenities((prev) => [...prev, e.target.value])
               }
@@ -258,8 +258,8 @@ const HotelDetails = () => {
                     <i
                       className={` fa-star   ${
                         index < item.averageRating
-                          ? 'fa-solid text-primary '
-                          : 'fa-regular text-black'
+                          ? "fa-solid text-primary "
+                          : "fa-regular text-black"
                       }`}
                     ></i>
                   ))}

@@ -1,47 +1,47 @@
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import {
   getAccessTokenFromLocalStorage,
   getAdminAccessTokenFromLocalStorage,
-} from './Helpers';
+} from "./Helpers";
 
-export const baseUrl = 'http://localhost:9000/api/v1';
+export const baseUrl = "http://localhost:9000/api/v1";
 
 const instance = axios.create({
   baseURL: baseUrl,
-  headers: { 'Access-Control-Allow-Origin': '*' },
+  headers: { "Access-Control-Allow-Origin": "*" },
 });
 
 instance.interceptors.request.use(
   function (config) {
     if (
-      config.url.includes('register') ||
-      config.url.includes('/login') ||
-      config.url.includes('/user/verifyotp') ||
-      config.url.includes('/sendmail') ||
-      config.url.includes('/forgotpassword') ||
-      config.url.includes('reset') ||
-      config.url.includes('/user/verifyfpotp')
+      config.url.includes("register") ||
+      config.url.includes("/login") ||
+      config.url.includes("/user/verifyotp") ||
+      config.url.includes("/sendmail") ||
+      config.url.includes("/forgotpassword") ||
+      config.url.includes("reset") ||
+      config.url.includes("/user/verifyfpotp")
     ) {
       return config;
     } else if (
-      config.url.includes('user') ||
-      config.url.includes('room') ||
-      config.url.includes('car') ||
-      config.url.includes('givereview')
+      config.url.includes("user") ||
+      config.url.includes("room") ||
+      config.url.includes("car") ||
+      config.url.includes("givereview")
     ) {
       config.headers[
-        'Authorization'
+        "Authorization"
       ] = `Bearer ${getAccessTokenFromLocalStorage()}`;
 
       return config;
     } else if (
-      config.url.includes('/admin') ||
-      config.url.includes('/approvehotelreview')
+      config.url.includes("/admin") ||
+      config.url.includes("/approvehotelreview")
     ) {
       config.headers[
-        'Authorization'
+        "Authorization"
       ] = `Bearer ${getAdminAccessTokenFromLocalStorage()}`;
 
       return config;
@@ -60,9 +60,10 @@ instance.interceptors.response.use(
   (error) => {
     const orginalRequest = error.config;
     if (error.response.status === 406) {
-      toast.error('Please Login to continue');
+      toast.error("Please Login to continue");
+      localStorage.clear();
       return setTimeout(() => {
-        window.location.href = '/login';
+        window.location.href = "/login";
       }, 1000);
     }
     return Promise.reject(error);

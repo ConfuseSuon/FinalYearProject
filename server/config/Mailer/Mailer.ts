@@ -4,8 +4,8 @@ export async function sendMail(otp: number, to: string, from: string) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "nischal0407@xavier.edu.np",
-      pass: "xAvier@123",
+      user: "sinupun50@gmail.com",
+      pass: "laba jkul btwc vban",
     },
   });
 
@@ -28,8 +28,8 @@ export async function sendMessageMail(
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "nischal0407@xavier.edu.np",
-      pass: "xAvier@123",
+      user: "sinupun50@gmail.com",
+      pass: "laba jkul btwc vban",
     },
   });
 
@@ -51,8 +51,8 @@ export async function sendMessageFromMail(
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "nischal0407@xavier.edu.np",
-      pass: "xAvier@123",
+      user: "sinupun50@gmail.com",
+      pass: "laba jkul btwc vban",
     },
   });
 
@@ -78,8 +78,8 @@ export async function sendBookingMail(
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "nischal0407@xavier.edu.np",
-      pass: "xAvier@123",
+      user: "sinupun50@gmail.com",
+      pass: "laba jkul btwc vban",
     },
   });
 

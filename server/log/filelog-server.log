@@ -1,0 +1,10 @@
+{"level":"error","message":"\"No User Found\"","timestamp":"2024-04-16T17:52:42.049Z"}
+{"level":"error","message":"\"User already exist\"","timestamp":"2024-04-16T18:12:57.098Z"}
+{"level":"error","message":"\"User already exist\"","timestamp":"2024-04-16T18:13:01.905Z"}
+{"level":"error","message":"\"User already exist\"","timestamp":"2024-04-16T18:13:03.561Z"}
+{"level":"error","message":"\"User already exist\"","timestamp":"2024-04-16T18:13:03.709Z"}
+{"level":"error","message":"\"User already exist\"","timestamp":"2024-04-16T18:13:08.525Z"}
+{"level":"error","message":"{\"message\":\"connection <monitor> to 43.205.152.252:27017 timed out\",\"reason\":{\"type\":\"ReplicaSetNoPrimary\",\"servers\":{},\"stale\":false,\"compatible\":true,\"heartbeatFrequencyMS\":10000,\"localThresholdMS\":15,\"setName\":\"atlas-ox34wp-shard-0\",\"maxElectionId\":\"7fffffff0000000000000004\",\"maxSetVersion\":7,\"commonWireVersion\":0,\"logicalSessionTimeoutMinutes\":30}}","timestamp":"2024-04-16T18:49:10.196Z"}
+{"level":"error","message":"{\"message\":\"connection <monitor> to 43.205.152.252:27017 timed out\",\"reason\":{\"type\":\"ReplicaSetNoPrimary\",\"servers\":{},\"stale\":false,\"compatible\":true,\"heartbeatFrequencyMS\":10000,\"localThresholdMS\":15,\"setName\":\"atlas-ox34wp-shard-0\",\"maxElectionId\":\"7fffffff0000000000000004\",\"maxSetVersion\":7,\"commonWireVersion\":0,\"logicalSessionTimeoutMinutes\":30}}","timestamp":"2024-04-16T18:49:10.199Z"}
+{"level":"error","message":"\"Password Incorrect\"","timestamp":"2024-04-17T15:04:20.898Z"}
+{"level":"error","message":"\"Password Incorrect\"","timestamp":"2024-04-17T15:04:25.299Z"}

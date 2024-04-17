@@ -1,43 +1,43 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import NavBar from '../Header/NavBar';
-import SideBar from '../Header/SideBar';
-import SwitchHC from '../Header/SwitchHC';
-import { Line } from 'react-chartjs-2';
 import {
+  CategoryScale,
   Chart as ChartJS,
   LineElement,
-  CategoryScale,
   LinearScale,
   PointElement,
-} from 'chart.js';
-import { useCurrentTypeConsumer } from '../../Services/useType';
-import { doGet } from '../../Services/Axios';
-import { toast } from 'react-toastify';
-import moment from 'moment';
+} from "chart.js";
+import moment from "moment";
+import React, { useEffect, useMemo, useState } from "react";
+import { Line } from "react-chartjs-2";
+import { toast } from "react-toastify";
+import { doGet } from "../../Services/Axios";
+import { useCurrentTypeConsumer } from "../../Services/useType";
+import NavBar from "../Header/NavBar";
+import SideBar from "../Header/SideBar";
+import SwitchHC from "../Header/SwitchHC";
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
 const Dashboard = () => {
-  const [type, setType] = useCurrentTypeConsumer();
+  // const [type, setType] = useCurrentTypeConsumer();
 
   const months = useMemo(
     () => [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'Nobember',
-      'December',
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "Nobember",
+      "December",
     ],
     []
   );
-  const [value, setValue] = useState('January');
+  const [value, setValue] = useState("January");
   const onOptionChangeHandler = (event) => {
     setValue(event.target.value);
   };
@@ -82,7 +82,7 @@ const Dashboard = () => {
   useEffect(() => {
     async function getUsers() {
       try {
-        const resp = await doGet('/user/all');
+        const resp = await doGet("/user/all");
 
         setUsers(resp.data);
 
@@ -102,7 +102,7 @@ const Dashboard = () => {
 
         setMonthlyUsers(i);
       } catch (error) {
-        toast.error('Error while fetching information');
+        toast.error("Error while fetching information");
       }
     }
     getUsers();
@@ -110,7 +110,7 @@ const Dashboard = () => {
   useEffect(() => {
     async function getUsers() {
       try {
-        const resps = await doGet('/bookinglist');
+        const resps = await doGet("/bookinglist");
 
         setBookingList(resps.data);
 
@@ -148,7 +148,7 @@ const Dashboard = () => {
         setMonthlyCarBooking(k);
         setMonthlyBookingCanc(m);
       } catch (error) {
-        toast.error('Error while fetching information');
+        toast.error("Error while fetching information");
       }
     }
     getUsers();
@@ -214,25 +214,25 @@ const Dashboard = () => {
           <Line
             data={{
               labels: [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'Nobember',
-                'December',
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "Nobember",
+                "December",
               ],
               datasets: [
                 {
                   data: monthlyUsers,
-                  backgroundColor: 'transparent',
-                  borderColor: 'black',
-                  pointBorderColor: 'white',
+                  backgroundColor: "transparent",
+                  borderColor: "black",
+                  pointBorderColor: "white",
                   pointBorderWidth: 1,
                   tension: 0.3,
                 },
@@ -246,37 +246,37 @@ const Dashboard = () => {
           <Line
             data={{
               labels: [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'Nobember',
-                'December',
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "Nobember",
+                "December",
               ],
               datasets: [
                 {
                   data: monthlyCarBooking,
-                  backgroundColor: 'transparent',
-                  borderColor: 'black',
-                  pointBorderColor: 'white',
+                  backgroundColor: "transparent",
+                  borderColor: "black",
+                  pointBorderColor: "white",
                   pointBorderWidth: 1,
                   tension: 0.3,
-                  label: 'Hotel Bookings',
+                  label: "Hotel Bookings",
                 },
                 {
                   data: monthlyBooking,
-                  backgroundColor: 'transparent',
-                  borderColor: 'black',
-                  pointBorderColor: 'white',
+                  backgroundColor: "transparent",
+                  borderColor: "black",
+                  pointBorderColor: "white",
                   pointBorderWidth: 1,
                   tension: 0.3,
-                  label: 'Car Booking',
+                  label: "Car Booking",
                 },
               ],
             }}
@@ -288,25 +288,25 @@ const Dashboard = () => {
           <Line
             data={{
               labels: [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'Nobember',
-                'December',
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "Nobember",
+                "December",
               ],
               datasets: [
                 {
                   data: monthlyBookingCanc,
-                  backgroundColor: 'transparent',
-                  borderColor: 'black',
-                  pointBorderColor: 'white',
+                  backgroundColor: "transparent",
+                  borderColor: "black",
+                  pointBorderColor: "white",
                   pointBorderWidth: 1,
                   tension: 0.3,
                 },

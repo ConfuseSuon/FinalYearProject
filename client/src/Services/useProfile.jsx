@@ -1,10 +1,6 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useContext } from 'react';
-import { useState } from 'react';
-import { createContext } from 'react';
-import { useLocation } from 'react-router';
-import { doGet } from './Axios';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router";
+import { doGet } from "./Axios";
 const UserProfileContext = createContext(null);
 const UserProfile = ({ children }) => {
   const location = useLocation();
@@ -17,15 +13,19 @@ const UserProfile = ({ children }) => {
     } catch (error) {}
   };
   useEffect(() => {
-    !location.pathname.includes('register') &&
-      !location.pathname.includes('/login') &&
-      !location.pathname.includes('/user/verifyotp') &&
-      !location.pathname.includes('/sendmail') &&
-      !location.pathname.includes('/forgotpassword') &&
-      !location.pathname.includes('/otp') &&
-      !location.pathname.includes('reset') &&
-      !location.pathname.includes('/user/verifyfpotp') &&
+    if (
+      !location.pathname.includes("register") &&
+      !location.pathname.includes("/login") &&
+      !location.pathname.includes("/user/verifyotp") &&
+      !location.pathname.includes("/sendmail") &&
+      !location.pathname.includes("/forgotpassword") &&
+      !location.pathname.includes("/otp") &&
+      !location.pathname.includes("reset") &&
+      !location.pathname.includes("/user/verifyfpotp") &&
+      !location.pathname.includes("/admin")
+    ) {
       fetchUser();
+    }
   }, [refresh, location]);
 
   return (

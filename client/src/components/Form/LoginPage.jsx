@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { doPost } from '../../Services/Axios';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { doPost } from "../../Services/Axios";
 import {
   setAccessTokenFromLocalStorage,
   setAdminAccessTokenFromLocalStorage,
@@ -9,9 +9,9 @@ import {
   setUserDetailsToLocalStorage,
   setUserEmailToLocalStorage,
   setUsernameToLocalStorage,
-} from '../../Services/Helpers';
-import { useForm } from '../../Services/useForm';
-import Navbar from '../navbar/navbar';
+} from "../../Services/Helpers";
+import { useForm } from "../../Services/useForm";
+import Navbar from "../navbar/navbar";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -19,17 +19,17 @@ const LoginPage = () => {
   const [verified, setVerified] = useState();
 
   const [error, setError] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const initialState = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   };
   const { handleChange, errors, states, validate } = useForm(initialState);
   const handleChangeOption = (data) => {
-    if (data === 'admin') {
+    if (data === "admin") {
       setIsAdmin(true);
     } else {
       setIsAdmin(false);
@@ -40,56 +40,56 @@ const LoginPage = () => {
     try {
       if (validate()) {
         if (isAdmin) {
-          const resp = await doPost('admin/login', states);
+          const resp = await doPost("admin/login", states);
           setAdminUsernameToLocalStorage(resp.data.firstName);
           setUserEmailToLocalStorage(resp.data.email);
-          setAdminAccessTokenFromLocalStorage(resp.data.accessToken);
-          navigate('/admin');
+          setAdminAccessTokenFromLocalStorage(resp.data.acessToken);
+          navigate("/admin");
         } else {
-          const resp = await doPost('user/login', states);
+          const resp = await doPost("user/login", states);
           setUsernameToLocalStorage(resp.data.firstName);
           setUserEmailToLocalStorage(resp.data.email);
           setAccessTokenFromLocalStorage(resp.data.access);
-          navigate('/');
+          navigate("/");
         }
       }
     } catch (error) {
       if (
         error.response &&
         error.response.data &&
-        typeof error.response.data === 'string'
+        typeof error.response.data === "string"
       ) {
-        if (error.response.data === 'Password Incorrect') {
+        if (error.response.data === "Password Incorrect") {
           setError((prev) => ({
             ...prev,
             password: error.response.data,
-            email: '',
+            email: "",
           }));
-        } else if (error.response.data === 'Account not verified') {
+        } else if (error.response.data === "Account not verified") {
           setError((prev) => ({
             ...prev,
             email: error.response.data,
-            password: '',
+            password: "",
           }));
-          setVerified('try');
+          setVerified("try");
           setUnverifiedEmailToLocalStorage(states.email);
         } else {
           setError((prev) => ({
             ...prev,
             email: error.response.data,
-            password: '',
+            password: "",
           }));
         }
       } else if (
         error.response &&
         error.response.data &&
         error.response.data &&
-        typeof error.response.data.response === 'string'
+        typeof error.response.data.response === "string"
       ) {
         setError((prev) => ({
           ...prev,
           email: error.response.data.response,
-          password: '',
+          password: "",
         }));
       }
     }
@@ -109,7 +109,7 @@ const LoginPage = () => {
             <div className="flex justify-between">
               <div
                 className=" flex cursor-pointer justify-evenly border-[1px] border-transparent  py-1 hover:border-r-[1px] hover:border-b-[1px] hover:border-b-black hover:border-r-black"
-                onClick={() => handleChangeOption('user')}
+                onClick={() => handleChangeOption("user")}
               >
                 <input
                   type="radio"
@@ -123,7 +123,7 @@ const LoginPage = () => {
               </div>
               <div
                 className=" flex cursor-pointer justify-evenly border-[1px] border-transparent  py-1 hover:border-r-[1px] hover:border-b-[1px] hover:border-b-black hover:border-r-black"
-                onClick={() => handleChangeOption('admin')}
+                onClick={() => handleChangeOption("admin")}
               >
                 <input
                   type="radio"
@@ -194,7 +194,7 @@ const LoginPage = () => {
                   >
                     Sign Up
                   </Link>
-                  {verified === 'try' && (
+                  {verified === "try" && (
                     <Link
                       to="/otp"
                       className="cursor-pointer pl-4 font-semibold text-[#1D7874] hover:underline"

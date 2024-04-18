@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import NavBar from '../../Header/NavBar';
-import SideBar from '../../Header/SideBar';
-import InputField from '../../../ResuableComponents/InputField';
-import axios from 'axios';
+import axios from "axios";
+import React, { useState } from "react";
+import InputField from "../../../ResuableComponents/InputField";
+import NavBar from "../../Header/NavBar";
+import SideBar from "../../Header/SideBar";
 
 const HotelOffers = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    offerName: '',
+    offerName: "",
     discountAfterBooking: {
       singleRoom: false,
       doubleRoom: false,
@@ -20,7 +20,7 @@ const HotelOffers = () => {
     event.preventDefault();
     try {
       setIsLoading(true);
-      const res = await axios.post('https://example.com/offers', formData);
+      const res = await axios.post("https://example.com/offers", formData);
 
       setIsLoading(false);
     } catch (error) {
@@ -30,7 +30,7 @@ const HotelOffers = () => {
   };
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    if (type === 'checkbox') {
+    if (type === "checkbox") {
       setFormData((prevState) => ({
         ...prevState,
         discountAfterBooking: {
@@ -77,7 +77,7 @@ const HotelOffers = () => {
               title="Offer Name"
               // value={formdata.offerName}
               // onChange={handleInputChange}
-              customStyle={{ width: '25%' }}
+              customStyle={{ width: "25%" }}
             />
           </div>
           <div className="mt-4 pl-20">
@@ -149,7 +149,7 @@ const HotelOffers = () => {
                   type="submit"
                   onClick={handleSubmit}
                 >
-                  {isLoading ? 'Loading...' : 'submit'}
+                  {isLoading ? "Loading..." : "submit"}
                 </button>
                 <button className="m-4 w-1/12 rounded-md  bg-[#1D7874] py-2 text-center text-white drop-shadow-lg">
                   Cancel

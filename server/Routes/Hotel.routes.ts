@@ -1,6 +1,6 @@
-import express, { Router } from "express";
+import crypto from "crypto";
+import express, { NextFunction, Request, Response, Router } from "express";
 import multer from "multer";
-import { Request, Response, NextFunction } from "express";
 import {
   cancelBookingController,
   deleteHotelController,
@@ -11,18 +11,17 @@ import {
   readLimitedOfferHotelsController,
   readWithRatingController,
 } from "../Controllers/Hotel.controller";
-import { validate } from "../middlewares/SchemaParser";
 import {
   createHotelSchema,
   deleteHotelSchema,
   getHotelSchema,
 } from "../Schema/Hotel.schema";
-import crypto from "crypto";
-import {
-  authenticateadmin,
-  authenticateToken,
-} from "../middlewares/Authentication";
 import { addReviewBodySchema } from "../Schema/Review.schema";
+import {
+  authenticateToken,
+  authenticateadmin,
+} from "../middlewares/Authentication";
+import { validate } from "../middlewares/SchemaParser";
 const router = Router();
 
 const storage = multer.diskStorage({

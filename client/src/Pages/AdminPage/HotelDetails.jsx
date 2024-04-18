@@ -34,12 +34,19 @@ const HotelDetails = () => {
       formData.append("location", states.location);
       formData.append("description", states.description);
       formData.append("type", "Twin");
+
+      for (const pair of formData.entries()) {
+        console.log(pair[0] + ", " + pair[1]);
+      }
       const response = await doPost("/hotel/admin", formData);
-      toast.success("Hotel insert success!!!");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      if (response) {
+        toast.success("Hotel insert success!!!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
     } catch (error) {
+      console.log(error);
       if (
         error &&
         error.response &&
@@ -81,7 +88,7 @@ const HotelDetails = () => {
       <div className="mt-32 mr-10 h-fit flex-wrap justify-between pl-20">
         <div className="mx-auto">
           <h1 className="font-lato text-2xl font-bold leading-8 tracking-wider">
-            Hotel Details
+            Hotel Detailss
           </h1>
           <p className="mb-8">Add image</p>
         </div>
@@ -90,7 +97,7 @@ const HotelDetails = () => {
             type={"file"}
             name="hotelImages"
             onChange={(e) => setHotelImages(e.target.files)}
-            multiple={true}
+            multiple
             className="my-4 mx-auto rounded-md bg-[#1D7874] px-10 py-2 text-center text-white drop-shadow-lg"
           />
         </div>

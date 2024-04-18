@@ -1,38 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { image12, Logo } from '../../../assets/img';
-import InputField from '../../../ResuableComponents/InputField';
-import { baseUrl, doDelete, doGet, doPost } from '../../../Services/Axios';
-import { useForm } from '../../../Services/useForm';
-import SwitchHC from '../../Header/SwitchHC';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import InputField from "../../../ResuableComponents/InputField";
+import { baseUrl, doDelete, doGet, doPost } from "../../../Services/Axios";
+import { useForm } from "../../../Services/useForm";
+import { Logo, image12 } from "../../../assets/img";
+import SwitchHC from "../../Header/SwitchHC";
 
 const CarDetails = () => {
   const [refresh, setRefresh] = useState([]);
   const [cars, setCars] = useState([]);
   const [carImages, setCarImages] = useState([]);
   const { handleChange, states, errors, validate } = useForm({
-    name: '',
-    seatnumber: '',
-    car_type: '',
-    car_number: '',
-    cost: '',
-    discount: '',
+    name: "",
+    seatnumber: "",
+    car_type: "",
+    car_number: "",
+    cost: "",
+    discount: "",
   });
   const [free_includes, setFreeIncludes] = useState([]);
   const [hireIncludes, setHireIncludes] = useState([]);
   const [review, setReview] = useState(false);
   const fetchCars = async () => {
     try {
-      const response = await doGet('/car/all');
+      const response = await doGet("/car/all");
       setCars(response.data);
-      console.log('====================================');
+      console.log("====================================");
       console.log(response);
-      console.log('====================================');
+      console.log("====================================");
     } catch (error) {
-      console.log('====================================');
+      console.log("====================================");
       console.log(error);
-      console.log('====================================');
+      console.log("====================================");
     }
   };
   useEffect(() => {
@@ -48,23 +48,26 @@ const CarDetails = () => {
     try {
       if (validate()) {
         const formData = new FormData();
-        Array.from(carImages).map((item) => formData.append('carImages', item));
+        Array.from(carImages).map((item) => formData.append("carImages", item));
 
-        formData.append('car_type', states.car_type);
-        formData.append('car_number', states.car_number);
-        formData.append('door_number', 5);
-        formData.append('seatnumber', states.seatnumber);
-        formData.set('name', states.name);
-        formData.append('trunkspace', 4);
-        formData.append('free_includes', [...new Set(free_includes)]);
-        formData.append('hire_Includes', [...new Set(hireIncludes)]);
-        formData.append('review_permission', review);
-        formData.append('cost', states.cost);
-        formData.append('ac_system', true);
-        formData.append('transmission', 'auto');
-        const response = await doPost('/car/addcar', formData);
-        setRefresh((prev) => !prev);
-        toast.success('Car successfully added');
+        formData.append("car_type", states.car_type);
+        formData.append("car_number", states.car_number);
+        formData.append("door_number", 5);
+        formData.append("seatnumber", states.seatnumber);
+        formData.set("name", states.name);
+        formData.append("trunkspace", 4);
+        formData.append("free_includes", [...new Set(free_includes)]);
+        formData.append("hire_Includes", [...new Set(hireIncludes)]);
+        formData.append("review_permission", review);
+        formData.append("cost", states.cost);
+        formData.append("ac_system", true);
+        formData.append("transmission", "auto");
+        console.log("passed");
+        const response = await doPost("/car/addcar", formData);
+        if (response) {
+          setRefresh((prev) => !prev);
+          toast.success("Car successfully added");
+        }
       }
     } catch (error) {
       if (
@@ -74,12 +77,14 @@ const CarDetails = () => {
         error.response.data.issues &&
         error.response.data.issues[0]
       ) {
+        console.log("first part");
         return toast.error(error.response.data.issues[0].message);
       }
-      if (error && error.response && typeof error.response.data === 'string') {
+      if (error && error.response && typeof error.response.data === "string") {
+        console.log("sec part");
         return toast.error(error.response.data);
       }
-      toast.error('Validation error');
+      toast.error("Validation error");
     }
   };
   console.log(errors, states);
@@ -106,7 +111,7 @@ const CarDetails = () => {
           />
 
           <label className="text-center" htmlFor="carImage">
-            Insert Images{' '}
+            Insert Images{" "}
           </label>
         </div>
         <div className="container mb-4 flex flex-wrap justify-between gap-5">
@@ -117,7 +122,7 @@ const CarDetails = () => {
             id="name"
             handleChange={handleChange}
             title="Name"
-            customStyle={{ width: '40%', gap: '5px' }}
+            customStyle={{ width: "40%", gap: "5px" }}
             error={errors.name}
           />
           <InputField
@@ -127,7 +132,7 @@ const CarDetails = () => {
             id="name"
             handleChange={handleChange}
             title="Type"
-            customStyle={{ width: '40%', gap: '5px' }}
+            customStyle={{ width: "40%", gap: "5px" }}
             error={errors.car_type}
           />
           <InputField
@@ -137,7 +142,7 @@ const CarDetails = () => {
             id="name"
             handleChange={handleChange}
             title="Seat number"
-            customStyle={{ width: '40%', gap: '5px' }}
+            customStyle={{ width: "40%", gap: "5px" }}
             error={errors.seatnumber}
           />
           <InputField
@@ -147,7 +152,7 @@ const CarDetails = () => {
             id="name"
             handleChange={handleChange}
             title="Car Number"
-            customStyle={{ width: '40%', gap: '5px' }}
+            customStyle={{ width: "40%", gap: "5px" }}
             error={errors.car_number}
           />
           <InputField
@@ -157,7 +162,7 @@ const CarDetails = () => {
             id="fname"
             handleChange={handleChange}
             title="Cost"
-            customStyle={{ width: '40%', gap: '5px' }}
+            customStyle={{ width: "40%", gap: "5px" }}
             error={errors.cost}
           />
           <InputField
@@ -167,7 +172,7 @@ const CarDetails = () => {
             id="name"
             handleChange={handleChange}
             title="Discount"
-            customStyle={{ width: '40%', gap: '5px' }}
+            customStyle={{ width: "40%", gap: "5px" }}
             error={errors.discount}
           />
         </div>
@@ -177,7 +182,7 @@ const CarDetails = () => {
             <input
               type="checkbox"
               name="option1"
-              value={'Collision damage waiver'}
+              value={"Collision damage waiver"}
               onChange={(e) =>
                 setFreeIncludes((prev) => [...prev, e.target.value])
               }
@@ -188,7 +193,7 @@ const CarDetails = () => {
             <input
               type="checkbox"
               name="option1"
-              value={'Theft protection'}
+              value={"Theft protection"}
               onChange={(e) =>
                 setFreeIncludes((prev) => [...prev, e.target.value])
               }
@@ -199,7 +204,7 @@ const CarDetails = () => {
             <input
               type="checkbox"
               name="option1"
-              value={'Third party protection'}
+              value={"Third party protection"}
               onChange={(e) =>
                 setFreeIncludes((prev) => [...prev, e.target.value])
               }
@@ -210,7 +215,7 @@ const CarDetails = () => {
             <input
               type="checkbox"
               name="option1"
-              value={'Cancellation'}
+              value={"Cancellation"}
               onChange={(e) =>
                 setFreeIncludes((prev) => [...prev, e.target.value])
               }
@@ -223,7 +228,7 @@ const CarDetails = () => {
             <input
               type="checkbox"
               name="option1"
-              value={'Unlimited Mileage'}
+              value={"Unlimited Mileage"}
               onChange={(e) =>
                 setHireIncludes((prev) => [...prev, e.target.value])
               }
@@ -234,7 +239,7 @@ const CarDetails = () => {
             <input
               type="checkbox"
               name="option1"
-              value={'Airport Surcharges'}
+              value={"Airport Surcharges"}
               onChange={(e) =>
                 setHireIncludes((prev) => [...prev, e.target.value])
               }
@@ -245,7 +250,7 @@ const CarDetails = () => {
             <input
               type="checkbox"
               name="option1"
-              value={'Break Down Assistance'}
+              value={"Break Down Assistance"}
               onChange={(e) =>
                 setHireIncludes((prev) => [...prev, e.target.value])
               }

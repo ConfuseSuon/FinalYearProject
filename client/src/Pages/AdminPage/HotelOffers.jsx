@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import InputField from '../../ResuableComponents/InputField';
-import { doGet, doPost, doPut } from '../../Services/Axios';
-import Button from '../../UI/Button/Button';
-import SwitchHC from '../Header/SwitchHC';
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import InputField from "../../ResuableComponents/InputField";
+import { doGet, doPost, doPut } from "../../Services/Axios";
+import Button from "../../UI/Button/Button";
+import SwitchHC from "../Header/SwitchHC";
 
 const HotelOffers = () => {
   const [count, setCount] = useState(0);
-  const [offer_type, setOffer] = useState('');
+  const [offer_type, setOffer] = useState("");
   const [hotels, setHotels] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [room, setRoom] = useState();
@@ -20,7 +20,7 @@ const HotelOffers = () => {
   useEffect(() => {
     const fetchHotel = async () => {
       try {
-        const response = await doGet('/hotel/all');
+        const response = await doGet("/hotel/all");
         setHotels(response.data);
       } catch (error) {}
     };
@@ -31,7 +31,8 @@ const HotelOffers = () => {
     try {
       const hotel = await doGet(`/hotel/read/${e}`);
 
-      setRooms(hotel.data.room); setRoom(hotel.data.room[0].room_id);
+      setRooms(hotel.data.room);
+      setRoom(hotel.data.room[0].room_id);
     } catch (error) {}
   };
   const handleRoomChange = (e) => {
@@ -43,16 +44,16 @@ const HotelOffers = () => {
   const handleSubmit = async () => {
     try {
       if (!offer_type || count < 1 || !offer_type)
-        return toast.error('Please fill all fields');
-      const respose = await doPut('/room/addoffer', {
+        return toast.error("Please fill all fields");
+      const respose = await doPut("/room/addoffer", {
         room_number: room,
         offer: count,
         offer_type,
       });
-      toast.success('Offer added successfully');
+      toast.success("Offer added successfully");
     } catch (error) {
-      console.log(error)
-      toast.error('Error while Adding offer');
+      console.log(error);
+      toast.error("Error while Adding offer");
     }
   };
 
@@ -73,7 +74,7 @@ const HotelOffers = () => {
             id="name"
             title="Offer Name"
             handleChange={(e) => setOffer(e.target.value)}
-            customStyle={{ width: '25%' }}
+            customStyle={{ width: "25%" }}
           />
         </div>
         <div className="mt-4">
@@ -101,7 +102,7 @@ const HotelOffers = () => {
               </button>
             </div>
           </div>
-          <div className="flex flex-col gap-4 w-52">
+          <div className="flex w-52 flex-col gap-4">
             <select
               className="py-4 px-2"
               onChange={(e) => handleHotelChange(e.target.value)}
@@ -126,7 +127,7 @@ const HotelOffers = () => {
               </select>
             )}
             <div className="w-48">
-              <Button onClick={handleSubmit} text={'Apply'}></Button>
+              <Button onClick={handleSubmit} text={"Apply"}></Button>
             </div>
           </div>
         </div>

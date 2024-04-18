@@ -1,15 +1,15 @@
-import { validate } from 'khalti-checkout-web';
-import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import { Logo, Room2 } from '../../assets/img';
-import InputField from '../../ResuableComponents/InputField';
-import { doDelete, doGet, doPost } from '../../Services/Axios';
-import { useForm } from '../../Services/useForm';
-import SwitchHC from '../Header/SwitchHC';
+import { validate } from "khalti-checkout-web";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import InputField from "../../ResuableComponents/InputField";
+import { doDelete, doGet, doPost } from "../../Services/Axios";
+import { useForm } from "../../Services/useForm";
+import { Logo, Room2 } from "../../assets/img";
+import SwitchHC from "../Header/SwitchHC";
 
 const HotelAdd = () => {
-  const switchs = ['Pokhara restaurant and bar', 'Saili vanxa'];
-  const [value, setValue] = useState('Select a hotel');
+  const switchs = ["Pokhara restaurant and bar", "Saili vanxa"];
+  const [value, setValue] = useState("Select a hotel");
   const [refresh, setRefresh] = useState(false);
   const [hotels, setHotels] = useState([]);
   const [rooms, setRooms] = useState([]);
@@ -18,13 +18,14 @@ const HotelAdd = () => {
   };
 
   const { handleChange, states, validate } = useForm({
-    name: '',
-    location: '',
+    room_number: "",
+    hotel_id: "",
+    cost: "",
   });
   useEffect(() => {
     const fetchHotel = async () => {
       try {
-        const response = await doGet('/hotel/all');
+        const response = await doGet("/hotel/all");
         setHotels(response.data);
       } catch (error) {}
     };
@@ -38,28 +39,29 @@ const HotelAdd = () => {
   };
   const handleSubmit = async () => {
     try {
-      console.log('====================================');
-      console.log('Dle');
-      console.log('====================================');
+      console.log("====================================");
+      console.log("Dle");
+      console.log("====================================");
+      console.log(states.room_number, states.hotel_id, states.cost, "rock");
       if (
         validate() &&
         !!states.room_number &&
         !!states.hotel_id &&
         !!states.cost
       ) {
-        const response = await doPost('/room/addroom', {
+        const response = await doPost("/room/addroom", {
           hotel_id: states.hotel_id,
           room_number: states.room_number,
           cost: +states.cost,
         });
-        toast.success('Room added successfully');
+        toast.success("Room added successfully");
       } else {
-        toast.error('Please fill all fields');
+        toast.error("Please fill all fields");
       }
     } catch (error) {
-      if (typeof error.response.data === 'string')
+      if (typeof error.response.data === "string")
         return toast.error(error.response.data);
-      toast.error('Error while adding room');
+      toast.error("Error while adding room");
     }
   };
   const handleDelete = async (id) => {
@@ -67,9 +69,9 @@ const HotelAdd = () => {
       const response = await doDelete(`/room/${id}`);
       window.location.reload();
     } catch (error) {
-      console.log('====================================');
+      console.log("====================================");
       console.log(error);
-      console.log('====================================');
+      console.log("====================================");
     }
   };
 
@@ -87,7 +89,7 @@ const HotelAdd = () => {
               handleChange(e);
               handleHotelChange(e.target.value);
             }}
-            name={'hotel_id'}
+            name={"hotel_id"}
             className="mb-5 w-full cursor-pointer border bg-transparent p-2 outline-none"
           >
             <option className="" value={false}>
@@ -95,9 +97,10 @@ const HotelAdd = () => {
             </option>
             {hotels &&
               hotels.length > 0 &&
-              hotels.map((item) => (
-                <option value={item.hotel_id}>{item.name}</option>
-              ))}
+              hotels.map((item) => {
+                console.log(item, "hotel");
+                return <option value={item.hotel_id}>{item.name}</option>;
+              })}
           </select>
           <InputField
             type="text"
@@ -106,9 +109,9 @@ const HotelAdd = () => {
             id="fname"
             title="Room Number"
             customStyle={{
-              width: '100%',
-              margin: '1.25rem 0',
-              gap: '5px',
+              width: "100%",
+              margin: "1.25rem 0",
+              gap: "5px",
             }}
             handleChange={handleChange}
           />
@@ -121,7 +124,7 @@ const HotelAdd = () => {
                 name="cost"
                 id="name"
                 title=""
-                customStyle={{ width: 'clamp(4rem, 20vw, 14rem)', gap: '5px' }}
+                customStyle={{ width: "clamp(4rem, 20vw, 14rem)", gap: "5px" }}
                 handleChange={handleChange}
               />
             </div>

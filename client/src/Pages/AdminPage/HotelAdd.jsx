@@ -137,7 +137,7 @@ const HotelAdd = () => {
           >
             Save
           </button>
-          <button className="m-4 rounded-md bg-[#1D7874]  px-7 py-2 text-center text-white drop-shadow-lg">
+          <button className="m-4 rounded-md bg-primary  px-7 py-2 text-center text-white drop-shadow-lg">
             Cancel
           </button>
         </div>

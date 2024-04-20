@@ -98,7 +98,7 @@ const HotelDetails = () => {
             name="hotelImages"
             onChange={(e) => setHotelImages(e.target.files)}
             multiple
-            className="my-4 mx-auto rounded-md bg-[#1D7874] px-10 py-2 text-center text-white drop-shadow-lg"
+            className="my-4 mx-auto rounded-md bg-primary px-10 py-2 text-center text-white drop-shadow-lg"
           />
         </div>
         <div className="container mb-4 flex flex-wrap justify-between gap-5">
@@ -236,7 +236,7 @@ const HotelDetails = () => {
           >
             Add
           </button>
-          <button className="w-24 rounded-md bg-[#1D7874] py-2 text-center text-white drop-shadow-lg">
+          <button className="w-24 rounded-md bg-primary py-2 text-center text-white drop-shadow-lg">
             Cancel
           </button>
         </div>

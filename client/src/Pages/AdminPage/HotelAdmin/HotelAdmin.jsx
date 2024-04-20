@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import NavBar from '../../Header/NavBar';
-import SideBar from '../../Header/SideBar';
-import InputField from '../../../ResuableComponents/InputField';
+import React, { useState } from "react";
+import InputField from "../../../ResuableComponents/InputField";
+import NavBar from "../../Header/NavBar";
+import SideBar from "../../Header/SideBar";
 // import Button from "../../../UI/Button/Button";
-import axios from 'axios';
+import axios from "axios";
 
 const HotelAdmin = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    location: '',
-    room: '',
+    name: "",
+    location: "",
+    room: "",
     amenities: {
       wifi: false,
       pool: false,
@@ -23,7 +23,7 @@ const HotelAdmin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://example.com/hotels', formData);
+      const res = await axios.post("https://example.com/hotels", formData);
 
       setLoading(false);
     } catch (err) {}
@@ -31,7 +31,7 @@ const HotelAdmin = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    if (type === 'checkbox') {
+    if (type === "checkbox") {
       setFormData((prevState) => ({
         ...prevState,
         amentities: {
@@ -39,10 +39,10 @@ const HotelAdmin = () => {
           [name]: checked,
         },
       }));
-    } else if (type === 'radio') {
+    } else if (type === "radio") {
       setFormData((prevState) => ({
         ...prevState,
-        review: value === 'on',
+        review: value === "on",
       }));
     } else {
       setFormData((prevState) => ({
@@ -69,7 +69,7 @@ const HotelAdmin = () => {
               <p className="mb-8">Add image</p>
 
               <div className=" mx-auto mb-8 flex h-32  w-80 flex-col justify-center  rounded-md bg-[#F5F5F5] p-3">
-                <button className="my-4 mx-auto w-1/2 rounded-md  bg-[#1D7874] py-2 text-center text-white drop-shadow-lg">
+                <button className="my-4 mx-auto w-1/2 rounded-md  bg-primary py-2 text-center text-white drop-shadow-lg">
                   Upload Photo
                 </button>
                 <p className="text-center">Drag and Drop the File</p>
@@ -84,7 +84,7 @@ const HotelAdmin = () => {
                   name="Name"
                   id="name"
                   title="Name"
-                  customStyle={{ width: '45%' }}
+                  customStyle={{ width: "45%" }}
                   value={formData.name}
                   onChange={handleInputChange}
                 />
@@ -94,7 +94,7 @@ const HotelAdmin = () => {
                   name="Location"
                   id="fname"
                   title="Location"
-                  customStyle={{ width: '45%' }}
+                  customStyle={{ width: "45%" }}
                   value={formData.location}
                   onChange={handleInputChange}
                 />
@@ -104,7 +104,7 @@ const HotelAdmin = () => {
                 <h1>Available Room</h1>
                 <div className="flex ">
                   <div className="mb-4 pr-4 ">
-                    <button className="m-4 w-full rounded-md  bg-[#1D7874] py-2 text-center text-white drop-shadow-lg">
+                    <button className="m-4 w-full rounded-md  bg-primary py-2 text-center text-white drop-shadow-lg">
                       +
                     </button>
                   </div>
@@ -114,7 +114,7 @@ const HotelAdmin = () => {
                     </button>
                   </div>
                   <div className="pl-4">
-                    <button className="m-4 w-full rounded-md  bg-[#1D7874] py-2 text-center text-white drop-shadow-lg">
+                    <button className="m-4 w-full rounded-md  bg-primary py-2 text-center text-white drop-shadow-lg">
                       -
                     </button>
                   </div>
@@ -125,7 +125,7 @@ const HotelAdmin = () => {
                   name="room"
                   id="room"
                   title="Cost Per Room"
-                  customStyle={{ width: '20%' }}
+                  customStyle={{ width: "20%" }}
                   value={formData.room}
                   onChange={handleInputChange}
                 />
@@ -200,7 +200,7 @@ const HotelAdmin = () => {
                   >
                     Add
                   </button>
-                  <button className="m-4 w-1/12 rounded-md  bg-[#1D7874] py-2 text-center text-white drop-shadow-lg">
+                  <button className="m-4 w-1/12 rounded-md  bg-primary py-2 text-center text-white drop-shadow-lg">
                     Cancel
                   </button>
                 </div>

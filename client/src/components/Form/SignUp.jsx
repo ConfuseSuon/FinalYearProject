@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import InputField from '../../ResuableComponents/InputField';
-import Button from '../../UI/Button/Button';
-import { Link, useNavigate } from 'react-router-dom';
-import Navbar from '../navbar/navbar';
-import { doPost } from '../../Services/Axios';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import InputField from "../../ResuableComponents/InputField";
+import { doPost } from "../../Services/Axios";
+import Button from "../../UI/Button/Button";
+import Navbar from "../navbar/navbar";
 
 import {
   setAccessTokenFromLocalStorage,
   setUnverifiedEmailToLocalStorage,
   setUsernameToLocalStorage,
-} from '../../Services/Helpers';
+} from "../../Services/Helpers";
 
-import { useForm } from '../../Services/useForm';
+import { useForm } from "../../Services/useForm";
 
 const SignUp = () => {
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const router = useNavigate();
 
   const initialState = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    newPassword: '',
-    confirmPassword: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    newPassword: "",
+    confirmPassword: "",
   };
   const { handleChange, errors, states, validate } = useForm(initialState);
 
@@ -30,7 +30,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       if (validate()) {
-        const resp = await doPost('/user/register', {
+        const resp = await doPost("/user/register", {
           firstname: states.firstName,
           lastname: states.lastName,
           email: states.email,
@@ -40,14 +40,14 @@ const SignUp = () => {
 
         setUnverifiedEmailToLocalStorage(states.email);
 
-        router('/otp');
+        router("/otp");
       } else {
       }
     } catch (error) {
       if (
         error.response &&
         error.response.data &&
-        typeof error.response.data === 'string'
+        typeof error.response.data === "string"
       ) {
         setError(error.response.data);
       }
@@ -78,7 +78,7 @@ const SignUp = () => {
                 name="firstName"
                 id="fname"
                 handleChange={handleChange}
-                customStyle={{ width: 'calc(50% - 1.25rem)' }}
+                customStyle={{ width: "calc(50% - 1.25rem)" }}
                 title="First Name"
                 error={errors.firstName || error}
               />
@@ -91,7 +91,7 @@ const SignUp = () => {
                 handleChange={handleChange}
                 className="  mx-auto mb-2 mr-5 h-10 w-36 rounded-lg border-2 border-green-50 bg-gray-200 text-center"
                 title="Last Name"
-                customStyle={{ width: '50%' }}
+                customStyle={{ width: "50%" }}
                 error={errors.lastName}
               />
             </div>
@@ -132,7 +132,7 @@ const SignUp = () => {
                 />
               </div>
               <Button
-                text={'Create Account'}
+                text={"Create Account"}
                 onClick={(e) => handleSubmit(e)}
               />
               <div className="my-3 flex justify-start">
@@ -140,7 +140,7 @@ const SignUp = () => {
                   Already have an account? &nbsp;
                   <Link
                     to="/login"
-                    className="cursor-pointer font-semibold text-[#1D7874] hover:underline"
+                    className="cursor-pointer font-semibold text-primary hover:underline"
                   >
                     Sign In
                   </Link>

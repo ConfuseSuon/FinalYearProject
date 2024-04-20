@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { baseUrl, doGet } from '../../Services/Axios';
-import OfferCard from '../HomePage/OfferCard';
-import Card from '../HomePage/Card';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { baseUrl, doGet } from "../../Services/Axios";
+import Card from "../HomePage/Card";
+import OfferCard from "../HomePage/OfferCard";
 
 const LocalOffer = () => {
   const [hotelWithOffers, setHotelsWithOffer] = useState([]);
   const handleGetOfferHotels = async () => {
     try {
-      const response = await doGet('/hotel/readlimitedofferhotels');
+      const response = await doGet("/hotel/readlimitedofferhotels");
 
       setHotelsWithOffer(response.data);
     } catch (error) {}
@@ -17,8 +17,8 @@ const LocalOffer = () => {
     handleGetOfferHotels();
   }, []);
   return (
-    <div className="w-screen bg-slate-300 h-screen">
-      <div className="flex justify-center items-center text-3xl py-6">
+    <div className="h-screen w-screen bg-slate-300">
+      <div className="flex items-center justify-center py-6 text-3xl">
         Local Offers
       </div>
       <div className="flex flex-wrap justify-evenly">
@@ -49,25 +49,25 @@ const LocalOffer = () => {
                         <i
                           className={` fa-star   ${
                             index < item.averageRating
-                              ? 'fa-solid text-primary '
-                              : 'fa-regular text-black'
+                              ? "fa-solid text-primary "
+                              : "fa-regular text-black"
                           }`}
                         ></i>
                       ))}
                     </div>
                   </div>
-                  <h2 className="text-xl flex gap-4">
+                  <h2 className="flex gap-4 text-xl">
                     <div>{item.name}</div>
                     <div>
                       {item.averageCost
                         ? `Rs. ${item.averageCost.toFixed(0)}`
-                        : 'Rs. 0'}
+                        : "Rs. 0"}
                     </div>
                   </h2>
                   <p className="text-justify">{item.description}</p>
                 </div>
                 <div className="flex">
-                  <button className="w-full self-end rounded-b-lg bg-[#1D7874] py-2 text-white drop-shadow-lg">
+                  <button className="w-full self-end rounded-b-lg bg-primary py-2 text-white drop-shadow-lg">
                     Details
                   </button>
                   <div className="flex w-10 justify-center border-[1px] bg-transparent bg-white py-2">

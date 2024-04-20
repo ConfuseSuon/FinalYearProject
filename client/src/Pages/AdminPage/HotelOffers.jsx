@@ -83,7 +83,7 @@ const HotelOffers = () => {
             <div className="mb-4 flex gap-3 pr-4">
               <button
                 onClick={onClickMinus}
-                className="w-full rounded-md bg-[#1D7874] px-5 py-2 text-center text-white drop-shadow-lg"
+                className="w-full rounded-md bg-primary px-5 py-2 text-center text-white drop-shadow-lg"
               >
                 -
               </button>
@@ -96,7 +96,7 @@ const HotelOffers = () => {
             <div className="pl-4">
               <button
                 onClick={onClickAdd}
-                className="w-full rounded-md bg-[#1D7874]  px-5 py-2 text-center text-white drop-shadow-lg"
+                className="w-full rounded-md bg-primary  px-5 py-2 text-center text-white drop-shadow-lg"
               >
                 +
               </button>

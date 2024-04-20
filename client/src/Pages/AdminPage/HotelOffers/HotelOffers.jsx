@@ -85,7 +85,7 @@ const HotelOffers = () => {
             <div className="flex  ">
               <div className="mb-4 pr-4">
                 <button
-                  className="m-4 w-full rounded-md  bg-[#1D7874] py-2 text-center text-white drop-shadow-lg"
+                  className="m-4 w-full rounded-md  bg-primary py-2 text-center text-white drop-shadow-lg"
                   onClick={handleDecrement}
                 >
                   -
@@ -98,7 +98,7 @@ const HotelOffers = () => {
               </div>
               <div className="pl-4">
                 <button
-                  className="m-4 w-full rounded-md  bg-[#1D7874] py-2 text-center text-white drop-shadow-lg"
+                  className="m-4 w-full rounded-md  bg-primary py-2 text-center text-white drop-shadow-lg"
                   onClick={handleIncrement}
                 >
                   +
@@ -151,7 +151,7 @@ const HotelOffers = () => {
                 >
                   {isLoading ? "Loading..." : "submit"}
                 </button>
-                <button className="m-4 w-1/12 rounded-md  bg-[#1D7874] py-2 text-center text-white drop-shadow-lg">
+                <button className="m-4 w-1/12 rounded-md  bg-primary py-2 text-center text-white drop-shadow-lg">
                   Cancel
                 </button>
               </div>

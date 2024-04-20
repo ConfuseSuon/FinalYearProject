@@ -68,7 +68,7 @@ const CarAdd = () => {
           <button className="m-4 rounded-md bg-[#e3e9e9c6]  px-7 py-2 text-center text-black drop-shadow-lg">
             Save
           </button>
-          <button className="m-4 rounded-md bg-[#1D7874]  px-7 py-2 text-center text-white drop-shadow-lg">
+          <button className="m-4 rounded-md bg-primary px-7 py-2 text-center text-white drop-shadow-lg">
             Cancel
           </button>
         </div>
@@ -93,7 +93,7 @@ const CarAdd = () => {
               <button className="h-fit w-24 rounded-md bg-[#e3e9e9c6] py-2 text-center text-black drop-shadow-lg">
                 Delete
               </button>
-              <button className="h-fit w-24 rounded-md bg-[#1D7874] py-2 text-center text-white drop-shadow-lg">
+              <button className="h-fit w-24 rounded-md bg-primary py-2 text-center text-white drop-shadow-lg">
                 Edit
               </button>
             </div>
@@ -118,7 +118,7 @@ const CarAdd = () => {
               <button className="h-fit w-24 rounded-md bg-[#e3e9e9c6] py-2 text-center text-black drop-shadow-lg">
                 Delete
               </button>
-              <button className="h-fit w-24 rounded-md bg-[#1D7874] py-2 text-center text-white drop-shadow-lg">
+              <button className="h-fit w-24 rounded-md bg-primary py-2 text-center text-white drop-shadow-lg">
                 Edit
               </button>
             </div>
@@ -143,7 +143,7 @@ const CarAdd = () => {
               <button className="h-fit w-24 rounded-md bg-[#e3e9e9c6] py-2 text-center text-black drop-shadow-lg">
                 Delete
               </button>
-              <button className="h-fit w-24 rounded-md bg-[#1D7874] py-2 text-center text-white drop-shadow-lg">
+              <button className="h-fit w-24 rounded-md bg-primary py-2 text-center text-white drop-shadow-lg">
                 Edit
               </button>
             </div>
@@ -168,7 +168,7 @@ const CarAdd = () => {
               <button className="h-fit w-24 rounded-md bg-[#e3e9e9c6] py-2 text-center text-black drop-shadow-lg">
                 Delete
               </button>
-              <button className="h-fit w-24 rounded-md bg-[#1D7874] py-2 text-center text-white drop-shadow-lg">
+              <button className="h-fit w-24 rounded-md bg-primary py-2 text-center text-white drop-shadow-lg">
                 Edit
               </button>
             </div>

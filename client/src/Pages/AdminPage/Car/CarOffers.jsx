@@ -36,7 +36,7 @@ const CarOffers = () => {
             <div className="mb-4 flex gap-3 pr-4">
               <button
                 onClick={onClickMinus}
-                className="w-full rounded-md bg-[#1D7874] px-5 py-2 text-center text-white drop-shadow-lg"
+                className="w-full rounded-md bg-primary px-5 py-2 text-center text-white drop-shadow-lg"
               >
                 -
               </button>
@@ -49,7 +49,7 @@ const CarOffers = () => {
             <div className="pl-4">
               <button
                 onClick={onClickAdd}
-                className="w-full rounded-md bg-[#1D7874]  px-5 py-2 text-center text-white drop-shadow-lg"
+                className="w-full rounded-md bg-primary  px-5 py-2 text-center text-white drop-shadow-lg"
               >
                 +
               </button>
@@ -79,7 +79,7 @@ const CarOffers = () => {
               <button className="m-4 w-1/12 rounded-md  bg-[#e3e9e9c6] py-2 text-center text-black drop-shadow-lg">
                 Save
               </button>
-              <button className="m-4 w-1/12 rounded-md  bg-[#1D7874] py-2 text-center text-white drop-shadow-lg">
+              <button className="m-4 w-1/12 rounded-md  bg-primary py-2 text-center text-white drop-shadow-lg">
                 Cancel
               </button>
             </div>

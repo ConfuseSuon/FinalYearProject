@@ -117,7 +117,7 @@ const LoginPage = () => {
                   id=""
                   value="USER"
                   checked={!isAdmin}
-                  className="accent-green-700"
+                  className="accent-primary"
                 />
                 <p className="ml-2 font-bold">USER</p>
               </div>
@@ -131,7 +131,7 @@ const LoginPage = () => {
                   id=""
                   value="ADMIN"
                   checked={isAdmin}
-                  className="accent-green-700"
+                  className="accent-primary"
                 />
                 <p className="ml-2 font-bold">ADMIN</p>
               </div>
@@ -181,7 +181,7 @@ const LoginPage = () => {
               </div>
               <button
                 onClick={handleSubmit}
-                className="my-2 w-full rounded-md bg-[#1D7874] py-2 text-white drop-shadow-lg"
+                className="my-2 w-full rounded-md bg-primary py-2 text-white drop-shadow-lg"
               >
                 Login
               </button>
@@ -190,14 +190,14 @@ const LoginPage = () => {
                   Don't have an account ?
                   <Link
                     to="/register"
-                    className="cursor-pointer pl-4 font-semibold text-[#1D7874] hover:underline"
+                    className="cursor-pointer pl-4 font-semibold text-primary hover:underline"
                   >
                     Sign Up
                   </Link>
                   {verified === "try" && (
                     <Link
                       to="/otp"
-                      className="cursor-pointer pl-4 font-semibold text-[#1D7874] hover:underline"
+                      className="cursor-pointer pl-4 font-semibold text-primary hover:underline"
                     >
                       Verify
                     </Link>

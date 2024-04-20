@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Logo, profile } from '../../assets/img';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   getUserFromLocalStorage,
   isRemoveUserFromLocalStorage,
-} from '../../Services/Helpers';
-import { useCurrentUserContextConsumer } from '../../Services/useUserLocation';
+} from "../../Services/Helpers";
+import { useCurrentUserContextConsumer } from "../../Services/useUserLocation";
+import { Logo, profile } from "../../assets/img";
 
 const NavBar = () => {
   const { options, location, setLocation } = useCurrentUserContextConsumer();
@@ -25,12 +25,12 @@ const NavBar = () => {
 
   const handlegOut = () => {
     isRemoveUserFromLocalStorage();
-    window.location.href = '/';
+    window.location.href = "/";
   };
   return (
     <>
       <div className="place-items-left grid bg-red-300">
-        <Link to={'/'}>
+        <Link to={"/"}>
           <img
             src={Logo}
             alt="logo"
@@ -40,8 +40,8 @@ const NavBar = () => {
         <div
           className={
             display === true
-              ? 'fixed z-40 hidden h-screen w-screen place-items-center bg-black bg-opacity-75'
-              : 'fixed z-40 grid h-screen w-screen place-items-center bg-black bg-opacity-75'
+              ? "fixed z-40 hidden h-screen w-screen place-items-center bg-black bg-opacity-75"
+              : "fixed z-40 grid h-screen w-screen place-items-center bg-black bg-opacity-75"
           }
         >
           <div className="w-[25rem] rounded-xl bg-white px-5 py-2 pb-10">
@@ -104,7 +104,7 @@ const NavBar = () => {
           <span>
             {location &&
               options.filter((item) => item.country === location)[0].country}
-            &nbsp;{' '}
+            &nbsp;{" "}
             {location &&
               options.filter((item) => item.country === location)[0].currency}
             &emsp;&emsp;&#x25BC;
@@ -123,8 +123,8 @@ const NavBar = () => {
           <div
             className={
               show === true
-                ? 'top-15 absolute right-5 z-20 hidden w-max rounded-lg bg-white py-2 shadow shadow-black'
-                : 'top-15 absolute right-5 z-20 grid w-max rounded-lg bg-white py-2 shadow shadow-black'
+                ? "top-15 absolute right-5 z-20 hidden w-max rounded-lg bg-white py-2 shadow shadow-black"
+                : "top-15 absolute right-5 z-20 grid w-max rounded-lg bg-white py-2 shadow shadow-black"
             }
           >
             <Link
@@ -144,7 +144,7 @@ const NavBar = () => {
                 Sign Out
               </h2>
             ) : (
-              ''
+              ""
             )}
           </div>
         </div>

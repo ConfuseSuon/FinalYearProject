@@ -107,7 +107,7 @@ const CarDetails = () => {
             onChange={(e) => setCarImages(e.target.files)}
             type="file"
             multiple={true}
-            className="my-4 mx-auto rounded-md bg-[#1D7874] px-10 py-2 text-center text-white drop-shadow-lg"
+            className="my-4 mx-auto rounded-md bg-primary px-10 py-2 text-center text-white drop-shadow-lg"
           />
 
           <label className="text-center" htmlFor="carImage">
@@ -287,7 +287,7 @@ const CarDetails = () => {
           >
             Add
           </button>
-          <button className="w-24 rounded-md bg-[#1D7874] py-2 text-center text-white drop-shadow-lg">
+          <button className="w-24 rounded-md bg-primary py-2 text-center text-white drop-shadow-lg">
             Cancel
           </button>
         </div>

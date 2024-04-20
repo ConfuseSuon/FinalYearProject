@@ -1,11 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { baseUrl } from '../../Services/Axios';
+import React from "react";
+import { Link } from "react-router-dom";
+import { baseUrl } from "../../Services/Axios";
 
 const OfferCard = ({ item }) => {
-  console.log('====================================');
+  console.log("====================================");
   console.log(item);
-  console.log('====================================');
+  console.log("====================================");
   return (
     <Link to={`/hoteldescription/${item.hotel_id}`}>
       <div className="my-5 flex w-[25rem] rounded-lg bg-[#F5F5F5] hover:bg-slate-500 hover:bg-opacity-50">
@@ -33,25 +33,25 @@ const OfferCard = ({ item }) => {
                   <i
                     className={` fa-star   ${
                       index < item.averageRating
-                        ? 'fa-solid text-primary '
-                        : 'fa-regular text-black'
+                        ? "fa-solid text-primary "
+                        : "fa-regular text-black"
                     }`}
                   ></i>
                 ))}
               </div>
             </div>
-            <h2 className="text-xl flex gap-4">
+            <h2 className="flex gap-4 text-xl">
               <div>{item.name}</div>
               <div>
                 {item.averageCost
                   ? `Rs. ${item.averageCost.toFixed(0)}`
-                  : 'Rs. 0'}
+                  : "Rs. 0"}
               </div>
             </h2>
             <p className="text-justify">{item.description}</p>
           </div>
           <div className="flex">
-            <button className="w-full self-end rounded-b-lg bg-[#1D7874] py-2 text-white drop-shadow-lg">
+            <button className="w-full self-end rounded-b-lg bg-primary py-2 text-white drop-shadow-lg">
               Details
             </button>
             <div className="flex w-14 justify-center border-[1px] bg-transparent bg-white py-2">

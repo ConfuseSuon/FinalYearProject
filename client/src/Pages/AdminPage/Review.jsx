@@ -115,7 +115,10 @@ const Review = () => {
           </div>
         </div>
       ))}
-      <div className="w-12/12 grid place-items-center">
+      <div
+        className="w-12/12 grid place-items-center"
+        style={{ marginTop: "7rem" }}
+      >
         From Hotel
         <i className="fa-duotone fa-angles-down w-fit cursor-pointer py-5"></i>
       </div>

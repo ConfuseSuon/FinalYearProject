@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const SearchBar = ({ setFilterTerm, state }) => {
-  const [filterTerm, setTerm] = useState('');
+  const [filterTerm, setTerm] = useState("");
   const handleChange = (e) => {
     setTerm(e.target.value);
   };
@@ -19,11 +19,12 @@ const SearchBar = ({ setFilterTerm, state }) => {
           className="w-full rounded border-none  bg-[#F5F5F5] px-3 py-2 text-xl text-opacity-[50%] outline-none"
           placeholder="Pokhara"
           onChange={(e) => handleChange(e)}
-          defaultValue={state ?? ''}
+          defaultValue={state ?? ""}
         />
         <button
           className="w-44 rounded-md bg-primary py-2 text-xl text-white"
           onClick={handleSubmit}
+          style={{ color: "white" }}
         >
           Search
         </button>

@@ -92,50 +92,6 @@ const HotelDes = () => {
     setEndDate(e.target.value);
   };
 
-  // const handleBook = async () => {
-  //   try {
-  //     if (!room) return toast.error("please select room");
-  //     setShow((prev) => !prev);
-  //     await checkout.show({ amount: cost * 100 }).then(async () => {
-  //       const response = await doPost("/room/bookroom", {
-  //         room_id: room,
-  //         bookedDays: enumerateDaysBetweenDates(startDate, endDate),
-  //       });
-  //       toast.success("Room Booked Sucessfully");
-  //       setRefresh((prev) => !prev);
-  //     });
-  //   } catch (error) {
-  //     if (
-  //       error.response &&
-  //       error.response.data &&
-  //       typeof error.response.data === "string"
-  //     ) {
-  //       toast.error(error.response.data);
-  //     }
-  //   }
-  // };
-
-  const dummyBook = async () => {
-    try {
-      if (!room) return toast.error("please select room");
-      setShow((prev) => !prev);
-      const response = await doPost("/room/bookroom", {
-        room_id: room,
-        bookedDays: enumerateDaysBetweenDates(startDate, endDate),
-      });
-      toast.success("Room Booked Sucessfully");
-      setRefresh((prev) => !prev);
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.data &&
-        typeof error.response.data === "string"
-      ) {
-        toast.error(error.response.data);
-      }
-    }
-  };
-
   const currentUrl = window.location.href;
   const searchParams = new URLSearchParams(currentUrl);
   const status = searchParams.get("status");

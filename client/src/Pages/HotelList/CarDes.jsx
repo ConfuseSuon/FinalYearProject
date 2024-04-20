@@ -1,132 +1,162 @@
-import axios from 'axios';
-import moment from 'moment';
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import '../../App.css';
-import { Me, ring, Car1, Car2, Car3, Car4 } from '../../assets/img';
-import { baseUrl, doGet, doPost } from '../../Services/Axios';
-import NavBar from '../Header/NavBar';
-import Footer from '../HomePage/Footer';
-import KhaltiCheckout from 'khalti-checkout-web';
-import { getUserIdFromLocalStorage } from '../../Services/Helpers';
-import InputField from '../../ResuableComponents/InputField';
-import Button from '../../UI/Button/Button';
-import { useForm } from '../../Services/useForm';
+import axios from "axios";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import "../../App.css";
+import InputField from "../../ResuableComponents/InputField";
+import { baseUrl, doGet, doPost } from "../../Services/Axios";
+import { getUserIdFromLocalStorage } from "../../Services/Helpers";
+import { useForm } from "../../Services/useForm";
+import Button from "../../UI/Button/Button";
+import { Car1, Car2, Car3, Car4, Me, ring } from "../../assets/img";
+import NavBar from "../Header/NavBar";
+import Footer from "../HomePage/Footer";
 
 const CarDes = () => {
   const { id } = useParams();
   const [show, setShow] = useState(true);
 
-  let config = {
-    // replace this key with yours
-    'publicKey': 'test_public_key_dc74e0fd57cb46cd93832aee0a390234',
-    'productIdentity': `${id}`,
-    'productName': 'Car',
-    'productUrl': `http://localhost:3000/cardescription/${id}`,
-    'eventHandler': {
-      onSuccess(payload) {
-        // hit merchant api for initiating verfication
-        setShow(true);
-      },
-      // onError handler is optional
-      onError(error) {
-        // handle errors
-        console.log(error);
-        setShow(true);
-      },
-      onClose() {
-        console.log('widget is closing');
-        setShow(true);
-      },
-    },
-    'paymentPreference': [
-      'KHALTI',
-      'EBANKING',
-      'MOBILE_BANKING',
-      'CONNECT_IPS',
-      'SCT',
-    ],
-  };
-
-  let checkout = new KhaltiCheckout(config);
   var enumerateDaysBetweenDates = function (startDate, endDate) {
     var dates = [];
 
-    var currDate = moment(startDate).startOf('day');
-    var lastDate = moment(endDate).startOf('day');
+    var currDate = moment(startDate).startOf("day");
+    var lastDate = moment(endDate).startOf("day");
 
     while (currDate <= lastDate) {
-      dates.push(currDate.clone().format('YYYY-MM-DD'));
-      currDate = currDate.add(1, 'days');
+      dates.push(currDate.clone().format("YYYY-MM-DD"));
+      currDate = currDate.add(1, "days");
     }
 
     return dates;
   };
   const [car, setCar] = useState();
-  const [value, setValue] = useState('1 Car');
+  const [value, setValue] = useState("1 Car");
 
-  const [startDate, setStartDate] = useState(moment().format('YYYY-MM-DD'));
+  const [startDate, setStartDate] = useState(moment().format("YYYY-MM-DD"));
   const [endDate, setEndDate] = useState(
-    moment().add(1, 'days').format('YYYY-MM-DD')
+    moment().add(1, "days").format("YYYY-MM-DD")
   );
   const [refresh, setRefresh] = useState(false);
   const handleStartDate = (e) => {
     if (moment(e.target.valueAsDate) <= new moment()) {
-      setStartDate(moment().add(1, 'days').format('YYYY-MM-DD'));
-      return toast.error('Booking date must be later than today');
+      setStartDate(moment().add(1, "days").format("YYYY-MM-DD"));
+      return toast.error("Booking date must be later than today");
     }
     if (moment(e.target.valueAsDate) > moment(endDate)) {
       setStartDate(endDate);
-      return toast.error('Start Date must not be higher than end date ');
+      return toast.error("Start Date must not be higher than end date ");
     }
 
     setStartDate(e.target.value);
   };
   const handleEndDate = (e) => {
     if (moment(e.target.valueAsDate) <= new moment()) {
-      setEndDate(moment().add(1, 'days').format('YYYY-MM-DD'));
-      return toast.error('Booking date must be later than today');
+      setEndDate(moment().add(1, "days").format("YYYY-MM-DD"));
+      return toast.error("Booking date must be later than today");
     }
     if (moment(e.target.valueAsDate) < moment(endDate)) {
       setEndDate(setStartDate);
-      return toast.error('End Date must be higher than start date ');
+      return toast.error("End Date must be higher than start date ");
     }
     if (
       moment
         .duration(moment(e.target.valueAsDate).diff(new moment()))
         .asMonths() >= 1
     ) {
-      setEndDate(moment().add(1, 'days').format('YYYY-MM-DD'));
-      return toast.error('Booking date must not  be more than 1 month');
+      setEndDate(moment().add(1, "days").format("YYYY-MM-DD"));
+      return toast.error("Booking date must not  be more than 1 month");
     }
     setEndDate(e.target.value);
   };
   const handleKhaltiPayment = async () => {};
-  const handleBook = async (car) => {
+
+  // const handleBook = async (car) => {
+  //   try {
+  //     setShow((prev) => !prev);
+  //     await checkout.show({ amount: car.cost * 100 }).then(async () => {
+  //       if (!car) return toast.error("please select car");
+
+  //       const response = await doPost("/car/rentcar", {
+  //         car_id: car.car_id,
+  //         bookedDays: enumerateDaysBetweenDates(startDate, endDate),
+  //       });
+
+  //       toast.success("car Booked Sucessfully");
+  //       setRefresh((prev) => !prev);
+  //     });
+  //   } catch (error) {
+  //     if (
+  //       error.response &&
+  //       error.response.data &&
+  //       typeof error.response.data === "string"
+  //     ) {
+  //       toast.error(error.response.data);
+  //     }
+  //   }
+  // };
+
+  const currentUrl = window.location.href;
+  const searchParams = new URLSearchParams(currentUrl);
+  const status = searchParams.get("status");
+
+  useEffect(() => {
+    if (status === "Completed") {
+      verifyBooking();
+      setTimeout(() => {
+        const carId = localStorage.getItem("carId");
+        window.location.href = `http://localhost:3000/cardescription/${carId}`;
+      }, 3000);
+    }
+  }, [status]); //
+
+  const khaltiCheckout = async (carData) => {
     try {
-      setShow((prev) => !prev);
-      await checkout.show({ amount: car.cost * 100 }).then(async () => {
-        if (!car) return toast.error('please select car');
-
-        const response = await doPost('/car/rentcar', {
-          car_id: car.car_id,
-          bookedDays: enumerateDaysBetweenDates(startDate, endDate),
-        });
-
-        toast.success('car Booked Sucessfully');
-        setRefresh((prev) => !prev);
-      });
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.data &&
-        typeof error.response.data === 'string'
-      ) {
-        toast.error(error.response.data);
+      if (!carData) return toast.error("please select car");
+      localStorage.setItem("carData", carData?.car_id);
+      localStorage.setItem(
+        "carBookedDaysData",
+        JSON.stringify(enumerateDaysBetweenDates(startDate, endDate))
+      );
+      localStorage.setItem("carId", id);
+      console.log(carData?.cost, "hi");
+      const response = await axios.post(
+        "https://a.khalti.com/api/v2/epayment/initiate/",
+        JSON.stringify({
+          return_url: `http://localhost:3000/hoteldescription/${id}`,
+          website_url: `http://localhost:3000/hoteldescription/${id}`,
+          amount: carData?.cost * 100,
+          purchase_order_id: id,
+          purchase_order_name: "Car Booking",
+        }),
+        {
+          url: "https://a.khalti.com/api/v2/epayment/initiate/",
+          method: "POST",
+          headers: {
+            Authorization: "Key 55e69f0e6cab4414a1733d0f2e858041",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.data?.payment_url) {
+        window.location.href = response?.data?.payment_url;
       }
+    } catch (error) {
+      console.log(error, "khativai");
     }
   };
+
+  const verifyBooking = async () => {
+    const carData = {
+      room_id: localStorage.getItem("carData"),
+      bookedDays: JSON.parse(localStorage.getItem("carBookedDaysData")),
+    };
+    const response = await doPost("/car/rentcar", { ...carData });
+    if (response) {
+      toast.success("Car Booked Sucessfully");
+    }
+  };
+
   useEffect(() => {
     const getHotel = async () => {
       const response = await doGet(`/car/readcar/${id}`);
@@ -134,31 +164,34 @@ const CarDes = () => {
     };
     getHotel();
   }, [id, refresh]);
+
+  console.log(car, "filed");
+
   const { handleChange, errors, states, validate } = useForm({});
   const handleRate = async () => {
     try {
       if (validate()) {
-        const response = await doPost('/car/givereview', {
+        const response = await doPost("/car/givereview", {
           username: getUserIdFromLocalStorage(),
           message: states.message,
           rating: +states.rating,
           car_id: id,
         });
-        toast.success('Car rating successful');
+        toast.success("Car rating successful");
       }
     } catch (error) {
       if (
         error &&
         error.response &&
         error.response.data &&
-        typeof error.response.data === 'string'
+        typeof error.response.data === "string"
       ) {
-        if (error.response.data === 'Already Reviewed by this user') {
-          return toast.error('Already pending review');
+        if (error.response.data === "Already Reviewed by this user") {
+          return toast.error("Already pending review");
         }
         return toast.error(error.response.data);
       }
-      toast.error('Error rating unsuccessful');
+      toast.error("Error rating unsuccessful");
     }
   };
   return (
@@ -219,23 +252,18 @@ const CarDes = () => {
 
             <div className="mt-8 px-2">
               <div>
-                <span className="mr-3 text-2xl font-semibold">
-                  Toyota Yaris
-                </span>
+                <span className="mr-3 text-2xl font-semibold">{car?.name}</span>
                 {Array.from(Array(5)).map((el, index) => (
                   <i
                     className={` fa-star   ${
                       index < car.averageRating
-                        ? 'fa-solid text-primary '
-                        : 'fa-regular text-black'
+                        ? "fa-solid text-primary "
+                        : "fa-regular text-black"
                     }`}
                   ></i>
                 ))}
               </div>
-              <div className="my-2 flex gap-2">
-                <i className="  fa-solid fa-location-dot"></i>
-                <span className="text-sm">Pokhara, Chapagau</span>
-              </div>
+
               <div className="my-2 flex gap-2">
                 <i className=" fa-solid fa-message-pen"></i>
                 <span className="text-sm">{car.review.length} review</span>
@@ -247,7 +275,11 @@ const CarDes = () => {
                 </div>
                 <div className="flex items-center gap-2 rounded-md bg-white px-2 py-1">
                   <i className="fa-solid fa-car"></i>
-                  <span className="text-sm">Free Cancelation</span>
+                  {car?.free_includes[0]?.includes("Cancellation") ? (
+                    <span className="text-sm">Free Cancelation</span>
+                  ) : (
+                    <span className="text-sm">No Cancelation</span>
+                  )}
                 </div>
               </div>
             </div>
@@ -262,12 +294,12 @@ const CarDes = () => {
                   moment(startDate),
                   moment(endDate),
                   undefined,
-                  '[]'
+                  "[]"
                 );
               }).length === 0 ? (
                 <div
-                  className="rounded-md bg-primary py-2 px-14 text-white cursor-pointer"
-                  onClick={() => handleBook(car)}
+                  className="cursor-pointer rounded-md bg-primary py-2 px-14 text-white"
+                  onClick={() => khaltiCheckout(car)}
                 >
                   Book Now
                 </div>
@@ -325,7 +357,7 @@ const CarDes = () => {
               <div className="flex flex-wrap justify-start gap-10 bg-light-gray py-5">
                 <ul>
                   {car.free_includes.map((item) =>
-                    item.split(',').map((el) => (
+                    item.split(",").map((el) => (
                       <li className="flex">
                         <img
                           src={ring}
@@ -346,7 +378,7 @@ const CarDes = () => {
               <div className="flex flex-wrap justify-start gap-10 bg-light-gray py-5">
                 <ul className="">
                   {car.hire_includes.map((item) =>
-                    item.split(',').map((el) => (
+                    item.split(",").map((el) => (
                       <li className="flex">
                         <img
                           src={ring}
@@ -362,7 +394,7 @@ const CarDes = () => {
             </div>
             <div className="">
               <h1 className="py-5 pt-10 text-2xl font-semibold ">Reviews</h1>
-              {car.review_permission !== 'false' ? (
+              {car.review_permission !== "false" ? (
                 <div className="flex gap-2">
                   <div className="">
                     {car.review.filter(
@@ -370,15 +402,15 @@ const CarDes = () => {
                     ).length < 1 && (
                       <div className="">
                         <InputField
-                          name={'message'}
+                          name={"message"}
                           handleChange={handleChange}
                           title="Message"
                         />
                         <InputField
-                          name={'rating'}
+                          name={"rating"}
                           handleChange={handleChange}
-                          customStyle={{ width: '3rem' }}
-                          title={'rating'}
+                          customStyle={{ width: "3rem" }}
+                          title={"rating"}
                         />
                         <Button onClick={handleRate} text="Rate" />
                       </div>
@@ -409,8 +441,8 @@ const CarDes = () => {
                               <i
                                 className={` fa-star   ${
                                   index < item.rating
-                                    ? 'fa-solid text-primary'
-                                    : 'fa-regular text-black'
+                                    ? "fa-solid text-primary"
+                                    : "fa-regular text-black"
                                 }`}
                               ></i>
                             ))}

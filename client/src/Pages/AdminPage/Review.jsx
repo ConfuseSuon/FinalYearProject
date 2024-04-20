@@ -1,11 +1,11 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router';
-import { toast } from 'react-toastify';
-import { Me } from '../../assets/img';
-import { doGet, doPut } from '../../Services/Axios';
-import { useCurrentTypeConsumer } from '../../Services/useType';
-import SwitchHC from '../Header/SwitchHC';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useOutletContext } from "react-router";
+import { toast } from "react-toastify";
+import { doGet, doPut } from "../../Services/Axios";
+import { useCurrentTypeConsumer } from "../../Services/useType";
+import { Me } from "../../assets/img";
+import SwitchHC from "../Header/SwitchHC";
 
 const Review = () => {
   const [type, setType] = useCurrentTypeConsumer();
@@ -31,7 +31,7 @@ const Review = () => {
         }
       );
     } catch (error) {
-      toast.error('Approval error');
+      toast.error("Approval error");
     }
   };
   const handleCarApprove = (review) => {
@@ -51,8 +51,8 @@ const Review = () => {
   };
   const fetchHotelReviews = async () => {
     try {
-      const resp = await doGet('/review/readallhotelpendingreviews');
-      if (typeof resp.data === 'string') {
+      const resp = await doGet("/review/readallhotelpendingreviews");
+      if (typeof resp.data === "string") {
         return sethoteReviews([]);
       } else {
         return sethoteReviews(resp.data);
@@ -61,8 +61,8 @@ const Review = () => {
   };
   const fetchCarReviews = async () => {
     try {
-      const resp = await doGet('/review/readallcarpendingreviews');
-      if (typeof resp.data === 'string') {
+      const resp = await doGet("/review/readallcarpendingreviews");
+      if (typeof resp.data === "string") {
         return setCarReviews([]);
       } else {
         return setCarReviews(resp.data);
@@ -73,8 +73,9 @@ const Review = () => {
     fetchHotelReviews();
     fetchCarReviews();
   }, [type, refresh]);
+
   console.log(hoteReviews, carReviews);
-  return type === 'hotel' ? (
+  return type === "hotel" ? (
     <>
       <div className="w-cotent absolute top-14 right-[4rem] flex cursor-pointer items-center justify-evenly rounded-xl bg-[#F5F5F5] px-2 py-1 sm:right-[22rem] md:right-[25rem]">
         <SwitchHC ins="hotel" />
@@ -163,7 +164,10 @@ const Review = () => {
             </div>
           </div>
         ))}
-        <div className="w-12/12 grid place-items-center">
+        <div
+          className="w-12/12 grid place-items-center"
+          style={{ marginTop: "7rem" }}
+        >
           From Car
           <i className="fa-duotone fa-angles-down w-fit cursor-pointer py-5"></i>
         </div>

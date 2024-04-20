@@ -1,70 +1,38 @@
-import { Elements, PaymentElement } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router';
-import '../../App.css';
-import { Me, ring, Room1, Room2, Room3, Room4 } from '../../assets/img';
-import getStripe from '../../getStripe';
-import { baseUrl, doGet, doPost } from '../../Services/Axios';
-import Button from '../../UI/Button/Button';
-import NavBar from '../Header/NavBar';
-import Footer from '../HomePage/Footer';
-import moment from 'moment';
-import { toast } from 'react-toastify';
-import KhaltiCheckout from 'khalti-checkout-web';
-import InputField from '../../ResuableComponents/InputField';
-import { useForm } from '../../Services/useForm';
-import { getUserIdFromLocalStorage } from '../../Services/Helpers';
+import { Elements, PaymentElement } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+import KhaltiCheckout from "khalti-checkout-web";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router";
+import { toast } from "react-toastify";
+import "../../App.css";
+import InputField from "../../ResuableComponents/InputField";
+import { baseUrl, doGet, doPost } from "../../Services/Axios";
+import { getUserIdFromLocalStorage } from "../../Services/Helpers";
+import { useForm } from "../../Services/useForm";
+import Button from "../../UI/Button/Button";
+import { Me, Room1, Room2, Room3, Room4, ring } from "../../assets/img";
+import getStripe from "../../getStripe";
+import NavBar from "../Header/NavBar";
+import Footer from "../HomePage/Footer";
 let stripePromise = loadStripe(
-  'pk_test_51MA1w7G9ZwN3X5brmLc5kTaWz4mOXtxnMCF7Upjr5pu8EbsF6W35HXWOrB0B4bBNUNGmllIftuiNWZVyGk4MrgYy00CReN2tEX'
+  "pk_test_51MA1w7G9ZwN3X5brmLc5kTaWz4mOXtxnMCF7Upjr5pu8EbsF6W35HXWOrB0B4bBNUNGmllIftuiNWZVyGk4MrgYy00CReN2tEX"
 );
 const HotelDes = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [show, setShow] = useState(true);
 
-  let config = {
-    // replace this key with yours
-    'publicKey': 'test_public_key_029e4c05f8644a7792370a2a519febfc',
-    'productIdentity': `${id}`,
-    'productName': 'Car',
-    'productUrl': `http://localhost:3000/cardescription/${id}`,
-
-    'eventHandler': {
-      onSuccess(payload) {
-        // hit merchant api for initiating verfication
-
-        setShow(true);
-      },
-      // onError handler is optional
-      onError(error) {
-        // handle errors
-        console.log(error);
-        setShow(true);
-      },
-      onClose() {
-        console.log('widget is closing');
-        setShow(true);
-      },
-    },
-    'paymentPreference': [
-      'KHALTI',
-      'EBANKING',
-      'MOBILE_BANKING',
-      'CONNECT_IPS',
-      'SCT',
-    ],
-  };
-
-  let checkout = new KhaltiCheckout(config);
   var enumerateDaysBetweenDates = function (startDate, endDate) {
     var dates = [];
 
-    var currDate = moment(startDate).startOf('day');
-    var lastDate = moment(endDate).startOf('day');
+    var currDate = moment(startDate).startOf("day");
+    var lastDate = moment(endDate).startOf("day");
 
     while (currDate <= lastDate) {
-      dates.push(currDate.clone().format('YYYY-MM-DD'));
-      currDate = currDate.add(1, 'days');
+      dates.push(currDate.clone().format("YYYY-MM-DD"));
+      currDate = currDate.add(1, "days");
     }
 
     return dates;
@@ -72,14 +40,14 @@ const HotelDes = () => {
 
   const [room, setRoom] = useState();
   const [cost, setCost] = useState(0);
-  const [startDate, setStartDate] = useState(moment().format('YYYY-MM-DD'));
+  const [startDate, setStartDate] = useState(moment().format("YYYY-MM-DD"));
   const [endDate, setEndDate] = useState(
-    moment().add(1, 'days').format('YYYY-MM-DD')
+    moment().add(1, "days").format("YYYY-MM-DD")
   );
 
   const onRoomChangeHandler = (event) => {
-    setRoom(event.target.value.split(',')[0]);
-    setCost(+event.target.value.split(',')[1]);
+    setRoom(event.target.value.split(",")[0]);
+    setCost(+event.target.value.split(",")[1]);
   };
   const [hotel, setHotel] = useState();
   const [refresh, setRefresh] = useState(false);
@@ -92,81 +60,161 @@ const HotelDes = () => {
     getHotel();
   }, [id, refresh]);
 
-  const option = {
-    // passing the client secret obtained from the server
-    clientSecret:
-      'sk_test_51MA1w7G9ZwN3X5brgRNkQLV1F6sgvTMVrpoMYUvElldIGToP1115fat1mITTFqIn2PMc3LK3V3Z9D4vvwBICokM000S3vgT2YU',
-  };
   const handleStartDate = (e) => {
     if (moment(e.target.valueAsDate) <= new moment()) {
-      setStartDate(moment().add(1, 'days').format('YYYY-MM-DD'));
-      return toast.error('Booking date must be later than today');
+      setStartDate(moment().add(1, "days").format("YYYY-MM-DD"));
+      return toast.error("Booking date must be later than today");
     }
     if (moment(e.target.valueAsDate) > moment(endDate)) {
       setStartDate(endDate);
-      return toast.error('Start Date must not be higher than end date ');
+      return toast.error("Start Date must not be higher than end date ");
     }
 
     setStartDate(e.target.value);
   };
   const handleEndDate = (e) => {
     if (moment(e.target.valueAsDate) <= new moment()) {
-      setEndDate(moment().add(1, 'days').format('YYYY-MM-DD'));
-      return toast.error('Booking date must be later than today');
+      setEndDate(moment().add(1, "days").format("YYYY-MM-DD"));
+      return toast.error("Booking date must be later than today");
     }
     if (moment(e.target.valueAsDate) < moment(endDate)) {
       setEndDate(setStartDate);
-      return toast.error('End Date must be higher than start date ');
+      return toast.error("End Date must be higher than start date ");
     }
     if (
       moment
         .duration(moment(e.target.valueAsDate).diff(new moment()))
         .asMonths() >= 1
     ) {
-      setEndDate(moment().add(1, 'days').format('YYYY-MM-DD'));
-      return toast.error('Booking date must not  be more than 1 month');
+      setEndDate(moment().add(1, "days").format("YYYY-MM-DD"));
+      return toast.error("Booking date must not  be more than 1 month");
     }
     setEndDate(e.target.value);
   };
 
-  const handleBook = async () => {
+  // const handleBook = async () => {
+  //   try {
+  //     if (!room) return toast.error("please select room");
+  //     setShow((prev) => !prev);
+  //     await checkout.show({ amount: cost * 100 }).then(async () => {
+  //       const response = await doPost("/room/bookroom", {
+  //         room_id: room,
+  //         bookedDays: enumerateDaysBetweenDates(startDate, endDate),
+  //       });
+  //       toast.success("Room Booked Sucessfully");
+  //       setRefresh((prev) => !prev);
+  //     });
+  //   } catch (error) {
+  //     if (
+  //       error.response &&
+  //       error.response.data &&
+  //       typeof error.response.data === "string"
+  //     ) {
+  //       toast.error(error.response.data);
+  //     }
+  //   }
+  // };
+
+  const dummyBook = async () => {
     try {
-      if (!room) return toast.error('please select room');
+      if (!room) return toast.error("please select room");
       setShow((prev) => !prev);
-      await checkout.show({ amount: cost * 100 }).then(async () => {
-        const response = await doPost('/room/bookroom', {
-          room_id: room,
-          bookedDays: enumerateDaysBetweenDates(startDate, endDate),
-        });
-        toast.success('Room Booked Sucessfully');
-        setRefresh((prev) => !prev);
+      const response = await doPost("/room/bookroom", {
+        room_id: room,
+        bookedDays: enumerateDaysBetweenDates(startDate, endDate),
       });
+      toast.success("Room Booked Sucessfully");
+      setRefresh((prev) => !prev);
     } catch (error) {
       if (
         error.response &&
         error.response.data &&
-        typeof error.response.data === 'string'
+        typeof error.response.data === "string"
       ) {
         toast.error(error.response.data);
       }
     }
   };
 
+  const currentUrl = window.location.href;
+  const searchParams = new URLSearchParams(currentUrl);
+  const status = searchParams.get("status");
+  useEffect(() => {
+    if (status === "Completed") {
+      verifyBooking();
+      setTimeout(() => {
+        const hotelId = localStorage.getItem("hotelId");
+        window.location.href = `http://localhost:3000/hoteldescription/${hotelId}`;
+      }, 3000);
+    }
+  }, [status]); //
+
+  const khaltiCheckout = async () => {
+    try {
+      if (!room) return toast.error("please select room");
+      localStorage.setItem("roomData", room);
+      localStorage.setItem(
+        "bookedDaysData",
+        JSON.stringify(enumerateDaysBetweenDates(startDate, endDate))
+      );
+      localStorage.setItem("hotelId", id);
+      const response = await axios.post(
+        "https://a.khalti.com/api/v2/epayment/initiate/",
+        JSON.stringify({
+          return_url: `http://localhost:3000/hoteldescription/${id}`,
+          website_url: `http://localhost:3000/hoteldescription/${id}`,
+          amount: cost * 100,
+          purchase_order_id: id,
+          purchase_order_name: "Hotel Booking",
+          customer_info: {
+            name: "Ram Bahadur",
+            email: "test@khalti.com",
+            phone: "9800000001",
+          },
+        }),
+        {
+          url: "https://a.khalti.com/api/v2/epayment/initiate/",
+          method: "POST",
+          headers: {
+            Authorization: "Key 55e69f0e6cab4414a1733d0f2e858041",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.data?.payment_url) {
+        window.location.href = response?.data?.payment_url;
+      }
+    } catch (error) {
+      console.log(error, "khativai");
+    }
+  };
+
+  const verifyBooking = async () => {
+    const rommData = {
+      room_id: localStorage.getItem("roomData"),
+      bookedDays: JSON.parse(localStorage.getItem("bookedDaysData")),
+    };
+    const response = await doPost("/room/bookroom", { ...rommData });
+    if (response) {
+      toast.success("Room Booked Sucessfully");
+    }
+  };
+
   const { handleChange, states } = useForm({
-    message: '',
+    message: "",
     rating: 0,
   });
   const handleRate = async () => {
     try {
-      const response = await doPost('/hotel/givereview', {
+      const response = await doPost("/hotel/givereview", {
         username: getUserIdFromLocalStorage(),
         message: states.message,
         rating: +states.rating,
         hotel_id: id,
       });
-      toast.success('Hotel rating successful');
+      toast.success("Hotel rating successful");
     } catch (error) {
-      toast.error('Hotel rating error');
+      toast.error("Hotel rating error");
     }
   };
   console.log(
@@ -175,9 +223,9 @@ const HotelDes = () => {
         (item) => item.reviewer_id === getUserIdFromLocalStorage()
       )
   );
-  console.log('====================================');
+  console.log("====================================");
   console.log(hotel && hotel.review, getUserIdFromLocalStorage());
-  console.log('====================================');
+  console.log("====================================");
 
   return (
     hotel &&
@@ -228,8 +276,8 @@ const HotelDes = () => {
                   <i
                     className={` fa-star   ${
                       index < hotel.averageRating
-                        ? 'fa-solid text-primary '
-                        : 'fa-regular text-black'
+                        ? "fa-solid text-primary "
+                        : "fa-regular text-black"
                     }`}
                   ></i>
                 ))}
@@ -266,7 +314,7 @@ const HotelDes = () => {
           <div className="my-5 grid place-content-end">
             <button
               className="rounded-md bg-primary py-2 px-14 text-white "
-              onClick={() => handleBook()}
+              onClick={khaltiCheckout}
             >
               Book Now
             </button>
@@ -301,7 +349,7 @@ const HotelDes = () => {
                 <select
                   className="w-44 rounded border bg-white p-3 outline-none"
                   onChange={(e) => onRoomChangeHandler(e)}
-                  value={room + ',' + cost}
+                  value={room + "," + cost}
                 >
                   <option value={undefined}>Select</option>
                   {hotel.room
@@ -312,7 +360,7 @@ const HotelDes = () => {
                             moment(startDate),
                             moment(endDate),
                             undefined,
-                            '[]'
+                            "[]"
                           );
                         }).length === 0
                       );
@@ -321,7 +369,7 @@ const HotelDes = () => {
                       return (
                         <option
                           key={index}
-                          value={item.room_id + ',' + item.cost}
+                          value={item.room_id + "," + item.cost}
                         >
                           Hotel no. {item.room_number}
                         </option>
@@ -367,22 +415,22 @@ const HotelDes = () => {
               <div className="">
                 <h1 className="py-5 pt-10 text-2xl font-semibold">Reviews</h1>
 
-                {hotel.review_permission !== 'false' ? (
+                {hotel.review_permission !== "false" ? (
                   <div className="flex gap-2 ">
                     {hotel.review.filter(
                       (item) => item.reviewer_id === getUserIdFromLocalStorage()
                     ).length < 1 && (
                       <div className="">
                         <InputField
-                          name={'message'}
+                          name={"message"}
                           handleChange={handleChange}
                           title="Message"
                         />
                         <InputField
-                          name={'rating'}
+                          name={"rating"}
                           handleChange={handleChange}
-                          customStyle={{ width: '3rem' }}
-                          title={'rating'}
+                          customStyle={{ width: "3rem" }}
+                          title={"rating"}
                         />
                         <Button onClick={handleRate} text="Rate" />
                       </div>
@@ -407,8 +455,8 @@ const HotelDes = () => {
                                 <i
                                   className={` fa-star   ${
                                     index < item.rating
-                                      ? 'fa-solid text-primary '
-                                      : 'fa-regular text-black'
+                                      ? "fa-solid text-primary "
+                                      : "fa-regular text-black"
                                   }`}
                                 ></i>
                               ))}

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Outlet, useOutletContext } from 'react-router';
-import { Link } from 'react-router-dom';
-import { img1, Logo } from '../../assets/img';
-import { baseUrl, doGet } from '../../Services/Axios';
-import { useFilterConsumer } from '../../Services/useFilter';
-import SearchFor from './SearchFor';
+import React, { useEffect, useState } from "react";
+import { Outlet, useOutletContext } from "react-router";
+import { Link } from "react-router-dom";
+import { baseUrl, doGet } from "../../Services/Axios";
+import { useFilterConsumer } from "../../Services/useFilter";
+import { Logo, img1 } from "../../assets/img";
+import SearchFor from "./SearchFor";
 
 const Hotel = () => {
   const data = useOutletContext();
@@ -22,7 +22,7 @@ const Hotel = () => {
   const [suggested, setSuggested] = useState([]);
   const handleGetOfferHotels = async () => {
     try {
-      const response = await doGet('/hotel/all');
+      const response = await doGet("/hotel/all");
 
       setSuggested(response.data);
     } catch (error) {}
@@ -32,7 +32,7 @@ const Hotel = () => {
   }, []);
   useEffect(() => {
     const fetchHotels = async () => {
-      const response = await doGet('/hotel/all');
+      const response = await doGet("/hotel/all");
       console.log(response.data);
       if (!data.filterTerm && !data.state) {
         setFilteredHotels(response.data);
@@ -84,6 +84,8 @@ const Hotel = () => {
   //   filter.features,
   // ]);
 
+  console.log(filteredHotels, "zock");
+
   return (
     <>
       <p className="mx-5 mt-3 md:mx-14 lg:mx-20">
@@ -114,8 +116,8 @@ const Hotel = () => {
                         <i
                           className={` fa-star   ${
                             index < option.averageRating
-                              ? 'fa-solid text-primary '
-                              : 'fa-regular text-black'
+                              ? "fa-solid text-primary "
+                              : "fa-regular text-black"
                           }`}
                         ></i>
                       ))}
@@ -160,8 +162,8 @@ const Hotel = () => {
                       <i
                         className={` fa-star   ${
                           index < item.averageRating
-                            ? 'fa-solid text-primary '
-                            : 'fa-regular text-black'
+                            ? "fa-solid text-primary "
+                            : "fa-regular text-black"
                         }`}
                       ></i>
                     ))}

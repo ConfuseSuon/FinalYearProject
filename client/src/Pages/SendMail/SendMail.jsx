@@ -5,7 +5,7 @@ import { doPost } from "../../Services/Axios";
 import { setForgotEmailToLocalStorage } from "../../Services/Helpers";
 import { useForm } from "../../Services/useForm";
 import Button from "../../UI/Button/Button";
-import NoTextLogo from "../../assets/img/iconLogo.png";
+import NoTextLogo from "../../assets/img/BrandIcon.png";
 import Navbar from "../../components/navbar/navbar";
 
 const SendMail = () => {
@@ -51,7 +51,7 @@ const SendMail = () => {
             </div>
           </div>
           <div className="flex items-center justify-start gap-4 pr-8  ">
-            <div className="w-40">
+            <div className="w-24">
               <img src={NoTextLogo} alt="Logo" />
             </div>
           </div>

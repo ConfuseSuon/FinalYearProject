@@ -1,61 +1,62 @@
-import React, { useRef, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router';
-import { toast } from 'react-toastify';
-import Navbar from '../../components/navbar/navbar';
-import { doPost } from '../../Services/Axios';
+import React, { useRef, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router";
+import { toast } from "react-toastify";
+import { doPost } from "../../Services/Axios";
 import {
   getForgotEmailFromLocalstorage,
   getUnverifiedEmailFromLocalstorage,
-} from '../../Services/Helpers';
-import Button from '../../UI/Button/Button';
+} from "../../Services/Helpers";
+import Button from "../../UI/Button/Button";
+import loginImage from "../../assets/img/loginImage.jpg";
+import Navbar from "../../components/navbar/navbar";
 
 const Otp = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const [otp0ref, setotpOref] = useState('');
-  const [otp1ref, setotp1ref] = useState('');
-  const [otp2ref, setotp2ref] = useState('');
-  const [otp3ref, setotp3ref] = useState('');
-  const [otp4ref, setotp4ref] = useState('');
+  const [otp0ref, setotpOref] = useState("");
+  const [otp1ref, setotp1ref] = useState("");
+  const [otp2ref, setotp2ref] = useState("");
+  const [otp3ref, setotp3ref] = useState("");
+  const [otp4ref, setotp4ref] = useState("");
 
   const otps = `${otp0ref}${otp1ref}${otp2ref}${otp3ref}${otp4ref}`;
   const [error, setError] = useState(false);
   const handleSubmitOtp = async () => {
     try {
       if (
-        otp0ref === '' ||
-        otp1ref === '' ||
-        otp2ref === '' ||
-        otp3ref === '' ||
-        otp4ref === '' ||
-        typeof parseInt(otp0ref) !== 'number' ||
-        typeof parseInt(otp1ref) !== 'number' ||
-        typeof parseInt(otp2ref) !== 'number' ||
-        typeof parseInt(otp3ref) !== 'number' ||
-        typeof parseInt(otp4ref) !== 'number'
+        otp0ref === "" ||
+        otp1ref === "" ||
+        otp2ref === "" ||
+        otp3ref === "" ||
+        otp4ref === "" ||
+        typeof parseInt(otp0ref) !== "number" ||
+        typeof parseInt(otp1ref) !== "number" ||
+        typeof parseInt(otp2ref) !== "number" ||
+        typeof parseInt(otp3ref) !== "number" ||
+        typeof parseInt(otp4ref) !== "number"
       ) {
         setError(true);
       } else {
-        if (state === 'fp') {
-          await doPost('/user/verifyfpotp', {
+        if (state === "fp") {
+          await doPost("/user/verifyfpotp", {
             email: getForgotEmailFromLocalstorage(),
             otp: +otps,
           });
-          navigate('/reset', {
-            state: 'user',
+          navigate("/reset", {
+            state: "user",
           });
         } else {
-          const res = await doPost('/user/verifyotp', {
+          const res = await doPost("/user/verifyotp", {
             email: getUnverifiedEmailFromLocalstorage(),
             otp: +otps,
           });
-          if (res.data === 'Otp is not correct') {
+          if (res.data === "Otp is not correct") {
             return setError(true);
           }
-          toast.success('Your account has been verified successfully');
+          toast.success("Your account has been verified successfully");
           setTimeout(() => {
-            window.location.href = '/login';
+            window.location.href = "/login";
           }, 1000);
         }
       }
@@ -63,7 +64,7 @@ const Otp = () => {
       if (
         error.response &&
         error.response.data &&
-        typeof error.response.data === 'string'
+        typeof error.response.data === "string"
       ) {
         setError(true);
       }
@@ -79,7 +80,7 @@ const Otp = () => {
     } else if (e.keyCode == 39) {
       nextElementSibling && nextElementSibling.focus();
     } else if (e.keyCode == 8) {
-      if (e.target.value === '') {
+      if (e.target.value === "") {
         prevSibling && prevSibling.focus();
       }
     } else {
@@ -103,39 +104,58 @@ const Otp = () => {
   };
   const handleResend = async () => {
     try {
-      if (state === 'fp') {
-        const res = await doPost('user/resendotp', {
+      if (state === "fp") {
+        const res = await doPost("user/resendotp", {
           email: getForgotEmailFromLocalstorage(),
           otp: +otps,
         });
-        if (res.data === 'Otp is not correct') {
+        if (res.data === "Otp is not correct") {
           return setError(true);
         }
-        toast.success('Otp has been sent sucessfully !!!');
+        toast.success("Otp has been sent sucessfully !!!");
       } else {
-        const res = await doPost('user/resendotp', {
+        const res = await doPost("user/resendotp", {
           email: getUnverifiedEmailFromLocalstorage(),
           otp: +otps,
         });
-        if (res.data === 'Otp is not correct') {
+        if (res.data === "Otp is not correct") {
           return setError(true);
         }
-        toast.success('Otp has been sent sucessfully !!!');
+        toast.success("Otp has been sent sucessfully !!!");
       }
     } catch (error) {}
   };
 
   return (
-    <>
-      <Navbar />
-      <div className="flex h-[60vh] flex-col items-center justify-center gap-3">
+    <div
+      className="flex items-center justify-center"
+      style={{
+        height: "100dvh",
+        overflowY: "hidden",
+        background: "black",
+      }}
+    >
+      <div
+        style={{
+          backgroundImage: `url(${loginImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          width: "100vw",
+          height: "100vh",
+          margin: 0,
+          padding: 0,
+          opacity: "0.7",
+        }}
+      />
+      <div className="absolute top-0 z-50 flex h-[60vh] flex-col items-center justify-center gap-3">
         <div className="flex flex-col items-center justify-center gap-10">
           <div className="flex flex-col items-center gap-4">
-            <div className="px-2 text-center text-xl font-semibold tracking-widest text-gray-900 sm:text-2xl md:text-3xl">
+            <div className="px-2 text-center text-xl font-semibold tracking-widest text-zinc-50 sm:text-2xl md:text-3xl">
               Enter the 5 digit code sent to
             </div>
-            <div className="font-light tracking-wider text-black opacity-70">
-              {state && state.fp && state.fp === 'fp'
+            <div className="font-light tracking-wider text-zinc-50 opacity-70">
+              {state && state.fp && state.fp === "fp"
                 ? getForgotEmailFromLocalstorage()
                 : getUnverifiedEmailFromLocalstorage()}
             </div>
@@ -146,8 +166,8 @@ const Otp = () => {
                 <input
                   className={
                     error
-                      ? 'flex h-12 w-12 items-center justify-center rounded border border-red-500 border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14  sm:w-14 md:h-16  md:w-16'
-                      : 'flex h-12 w-12 items-center justify-center rounded border border-primary border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14 sm:w-14 md:h-16 md:w-16 '
+                      ? "flex h-12 w-12 items-center justify-center rounded border border-red-500 border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14  sm:w-14 md:h-16  md:w-16"
+                      : "flex h-12 w-12 items-center justify-center rounded border border-primary border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14 sm:w-14 md:h-16 md:w-16 "
                   }
                   id="mobile"
                   name={`otp0`}
@@ -159,8 +179,8 @@ const Otp = () => {
                 <input
                   className={
                     error
-                      ? 'flex h-12 w-12 items-center justify-center rounded border border-red-500 border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14  sm:w-14 md:h-16  md:w-16'
-                      : 'flex h-12 w-12 items-center justify-center rounded border border-primary border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14 sm:w-14 md:h-16 md:w-16 '
+                      ? "flex h-12 w-12 items-center justify-center rounded border border-red-500 border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14  sm:w-14 md:h-16  md:w-16"
+                      : "flex h-12 w-12 items-center justify-center rounded border border-primary border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14 sm:w-14 md:h-16 md:w-16 "
                   }
                   id="mobile"
                   name={`otp${1}`}
@@ -172,8 +192,8 @@ const Otp = () => {
                 <input
                   className={
                     error
-                      ? 'flex h-12 w-12 items-center justify-center rounded border border-red-500 border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14  sm:w-14 md:h-16  md:w-16'
-                      : 'flex h-12 w-12 items-center justify-center rounded border border-primary border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14 sm:w-14 md:h-16 md:w-16 '
+                      ? "flex h-12 w-12 items-center justify-center rounded border border-red-500 border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14  sm:w-14 md:h-16  md:w-16"
+                      : "flex h-12 w-12 items-center justify-center rounded border border-primary border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14 sm:w-14 md:h-16 md:w-16 "
                   }
                   id="mobile"
                   name={`otp2`}
@@ -185,8 +205,8 @@ const Otp = () => {
                 <input
                   className={
                     error
-                      ? 'flex h-12 w-12 items-center justify-center rounded border border-red-500 border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14  sm:w-14 md:h-16  md:w-16'
-                      : 'flex h-12 w-12 items-center justify-center rounded border border-primary border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14 sm:w-14 md:h-16 md:w-16 '
+                      ? "flex h-12 w-12 items-center justify-center rounded border border-red-500 border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14  sm:w-14 md:h-16  md:w-16"
+                      : "flex h-12 w-12 items-center justify-center rounded border border-primary border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14 sm:w-14 md:h-16 md:w-16 "
                   }
                   id="mobile"
                   name={`otp3`}
@@ -198,8 +218,8 @@ const Otp = () => {
                 <input
                   className={
                     error
-                      ? 'flex h-12 w-12 items-center justify-center rounded border border-red-500 border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14  sm:w-14 md:h-16  md:w-16'
-                      : 'flex h-12 w-12 items-center justify-center rounded border border-primary border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14 sm:w-14 md:h-16 md:w-16 '
+                      ? "flex h-12 w-12 items-center justify-center rounded border border-red-500 border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14  sm:w-14 md:h-16  md:w-16"
+                      : "flex h-12 w-12 items-center justify-center rounded border border-primary border-opacity-75 bg-light-gray  text-center text-3xl font-medium caret-primary outline-none sm:h-14 sm:w-14 md:h-16 md:w-16 "
                   }
                   id="mobile"
                   name={`otp4`}
@@ -210,22 +230,22 @@ const Otp = () => {
                 />
               </div>
               {error && (
-                <div className="text-red-700">Invalid/Incorrect OTP</div>
+                <div className="text-red-100">Invalid/Incorrect OTP</div>
               )}
             </div>
-            <Button onClick={handleSubmitOtp} text={'Continue'} />
+            <Button onClick={handleSubmitOtp} text={"Continue"} />
           </div>
         </div>
         <div className="font-light tracking-wider">
-          <span>Didn't get a code ?</span>
+          <span className="text-zinc-50">Didn't get a code ?</span>
 
-          <span className="cursor-pointer text-primary" onClick={handleResend}>
-            {' '}
+          <span className="cursor-pointer text-blue-200" onClick={handleResend}>
+            {" "}
             Resend code
           </span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

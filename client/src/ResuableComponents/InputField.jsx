@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const InputField = ({
   id,
@@ -15,7 +15,7 @@ const InputField = ({
     <div className="flex flex-col" style={customStyle}>
       <label
         htmlFor={id}
-        className="font-font-medium text-xs tracking-wide md:text-sm 2xl:pb-2 2xl:text-base"
+        className="font-font-medium text-xs tracking-wide text-zinc-300 md:text-sm 2xl:pb-2 2xl:text-base"
       >
         {title}
       </label>
@@ -26,12 +26,12 @@ const InputField = ({
         placeholder={placeholder}
         name={name}
         className={`rounded border bg-light-gray py-2 px-2 text-sm outline-none xl:text-base 2xl:py-3  ${
-          error ? 'border-red-600' : 'border-primary'
+          error ? "border-red-600" : "border-primary"
         }`}
         id={id}
         required={required}
       />
-      <span className="text-xs text-red-600 md:text-sm 2xl:text-base">
+      <span className="text-xs text-red-100 md:text-sm 2xl:text-base">
         {error}
       </span>
     </div>

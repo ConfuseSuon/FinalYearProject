@@ -11,6 +11,8 @@ import {
   setUsernameToLocalStorage,
 } from "../../Services/Helpers";
 import { useForm } from "../../Services/useForm";
+import Logo from "../../assets/img/SecondaryBrandLogo.png";
+import loginImage from "../../assets/img/loginImage.jpg";
 import Navbar from "../navbar/navbar";
 
 const LoginPage = () => {
@@ -98,12 +100,32 @@ const LoginPage = () => {
   return (
     <>
       {/* <FormHeader /> */}
-      <Navbar />
-      <div className="flex items-center justify-center">
-        <div className="4xl:max-w-4xls flex max-w-[90%] flex-col items-center justify-center sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 3xl:max-w-3xl">
+
+      <div
+        className="flex items-center justify-center"
+        style={{
+          height: "100dvh",
+          overflowY: "hidden",
+          background: "black",
+        }}
+      >
+        <div
+          style={{
+            backgroundImage: `url(${loginImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            width: "100vw",
+            height: "100vh",
+            margin: 0,
+            padding: 0,
+            opacity: "0.7",
+          }}
+        />
+        <div className="4xl:max-w-4xls absolute flex max-w-[90%] flex-col items-center justify-center sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 3xl:max-w-3xl">
           <div className="m-auto flex-row justify-center">
-            <h1 className="text-center text-[40px]">Welcome</h1>
-            <p className="text-center">sign in to your account</p>
+            <h1 className="text-center text-[40px] text-zinc-50">Welcome</h1>
+            <p className="text-center text-zinc-300">Sign in to your account</p>
           </div>
           <div className="w-full p-[2rem]">
             <div className="flex justify-between">
@@ -119,7 +141,7 @@ const LoginPage = () => {
                   checked={!isAdmin}
                   className="accent-primary"
                 />
-                <p className="ml-2 font-bold">USER</p>
+                <p className="ml-2 font-bold text-zinc-50">USER</p>
               </div>
               <div
                 className=" flex cursor-pointer justify-evenly border-[1px] border-transparent  py-1 hover:border-r-[1px] hover:border-b-[1px] hover:border-b-black hover:border-r-black"
@@ -133,7 +155,7 @@ const LoginPage = () => {
                   checked={isAdmin}
                   className="accent-primary"
                 />
-                <p className="ml-2 font-bold">ADMIN</p>
+                <p className="ml-2 font-bold text-zinc-50">ADMIN</p>
               </div>
             </div>
             <form
@@ -144,7 +166,9 @@ const LoginPage = () => {
               method="POST"
             >
               <div className="my-3 flex-row">
-                <label htmlFor="email font-bold">Email</label>
+                <label htmlFor="email font-bold" className="text-zinc-50">
+                  Email
+                </label>
                 <input
                   type="email"
                   name="email"
@@ -153,12 +177,14 @@ const LoginPage = () => {
                   placeholder="example@gmail.com"
                   onChange={handleChange}
                 />
-                <span className="text-red-700">
+                <span className="text-red-100">
                   {errors.email || error.email}
                 </span>
               </div>
               <div className="my-3 flex-row">
-                <label htmlFor="password font-bold">Password</label>
+                <label htmlFor="password font-bold" className="text-zinc-50">
+                  Password
+                </label>
                 <input
                   type="password"
                   name="password"
@@ -167,14 +193,14 @@ const LoginPage = () => {
                   placeholder="********"
                   onChange={handleChange}
                 />
-                <span className="text-red-700">
+                <span className="text-red-100">
                   {errors.password || error.password}
                 </span>
               </div>
 
               <div className="flex items-center justify-between">
                 <Link to="/sendmail">
-                  <p className="cursor-pointer hover:underline">
+                  <p className="cursor-pointer text-zinc-100 hover:underline">
                     Forgot Password ??
                   </p>
                 </Link>
@@ -186,11 +212,11 @@ const LoginPage = () => {
                 Login
               </button>
               <div className="my-3 flex justify-start">
-                <p>
+                <p className="text-zinc-200">
                   Don't have an account ?
                   <Link
                     to="/register"
-                    className="cursor-pointer pl-4 font-semibold text-primary hover:underline"
+                    className="cursor-pointer pl-4 font-semibold text-blue-200 hover:underline"
                   >
                     Sign Up
                   </Link>
@@ -207,6 +233,11 @@ const LoginPage = () => {
             </form>
             {/* 2ee8b29407ca0849a43eea964c807b20b59e263c */}
           </div>
+        </div>
+        <div className="absolute top-10 left-10">
+          <Link to={"/"}>
+            <img src={Logo} alt="Logo" style={{ width: "40%" }} />
+          </Link>
         </div>
       </div>
     </>

@@ -1,10 +1,10 @@
-import moment from 'moment';
-import React, { useEffect, useState } from 'react';
-import { Outlet, useOutletContext } from 'react-router';
-import { Link } from 'react-router-dom';
-import { image10, image11, image12 } from '../../assets/img';
-import { baseUrl, doGet } from '../../Services/Axios';
-import { useFilterConsumer } from '../../Services/useFilter';
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { Outlet, useOutletContext } from "react-router";
+import { Link } from "react-router-dom";
+import { baseUrl, doGet } from "../../Services/Axios";
+import { useFilterConsumer } from "../../Services/useFilter";
+import { image10, image11, image12 } from "../../assets/img";
 
 const Car = () => {
   const data = useOutletContext();
@@ -13,12 +13,12 @@ const Car = () => {
   const [filteredCars, setFilteredCars] = useState([]);
   useEffect(() => {
     const handleGetCars = async () => {
-      const response = await doGet('car/all');
+      const response = await doGet("car/all");
 
       if (!data.filterTerm && !data.state) {
-        setCars(response.data);
+        setFilteredCars(response.data);
       } else if (!data.filterTerm) {
-        setCars(
+        setFilteredCars(
           response.data.filter(
             (item) =>
               item.car_type.toLowerCase().includes(data.state.toLowerCase()) ||
@@ -28,39 +28,22 @@ const Car = () => {
           )
         );
       } else {
-        setCars(
-          response.data.filter(
-            (item) =>
-              item.car_type
-                .toLowerCase()
-                .includes(data.filterTerm.toLowerCase()) ||
-              item.name.toLowerCase().includes(data.filterTerm.toLowerCase()) ||
-              item.model
-                .toLowerCase()
-                .includes(data.filterTerm.toLowerCase()) ||
-              item.description
-                .toLowerCase()
-                .includes(data.filterTerm.toLowerCase())
-          )
+        setFilteredCars(
+          response.data?.filter((item) => {
+            return item.name
+              .toLowerCase()
+              .includes(data.filterTerm.toLowerCase());
+          })
         );
       }
     };
     handleGetCars();
   }, [data.filterTerm, data.state]);
 
-  const numbers = ['Economy', 'Mini', 'AC', 'Economy', 'Mini'];
-  useEffect(() => {
-    setFilteredCars(
-      cars.filter(
-        (item) => item.cost >= filter.range.min && item.cost <= filter.range.max
-      )
-    );
-  }, [filter.range.min, filter.range.max, cars]);
-
   return (
     <>
       <p className="mx-5 mt-3 md:mx-14 lg:mx-20">
-        Search Result "{data.state ?? data.filterTerm}"{' '}
+        Search Result "{data.state ?? data.filterTerm}"{" "}
       </p>
       {filteredCars.length > 0 &&
         filteredCars.map((item) => (

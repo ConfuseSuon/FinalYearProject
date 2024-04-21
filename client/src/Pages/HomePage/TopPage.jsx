@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import BrandWhiteLogo from "../../assets/img/BrandLogo.png";
+import SecondaryBrandLogo from "../../assets/img/SecondaryBrandLogo.png";
 
 import coverPic from "../../assets/img/coverPic.jpg";
 import { Untitled } from "../../assets/video";
@@ -119,9 +119,9 @@ const TopPage = () => {
         </div>
         <div className="absolute top-4 z-20 flex w-full items-center justify-between">
           <img
-            src={BrandWhiteLogo}
+            src={SecondaryBrandLogo}
             alt="logo"
-            className="z-20 w-36 text-white sm:w-80"
+            className="z-20 w-36 text-white sm:w-72"
           />
           <div className="flex w-full justify-around gap-5 sm:w-3/12 md:w-3/12 lg:w-2/12">
             {/* <div
@@ -154,6 +154,17 @@ const TopPage = () => {
                 </button>
               </Link>
             )}
+          </div>
+          <div className="absolute z-20 mt-80 flex w-[100%] justify-center rounded-xl align-middle text-gray-50 ">
+            <p
+              style={{
+                fontSize: "1.3rem",
+                fontWeight: "500",
+                letterSpacing: "1px",
+              }}
+            >
+              Your Stay, Your Way - Book with Ease!
+            </p>
           </div>
         </div>
 

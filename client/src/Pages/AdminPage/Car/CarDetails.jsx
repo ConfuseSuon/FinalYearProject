@@ -301,13 +301,11 @@ const CarDetails = () => {
               <>
                 <div className="mt-5 flex w-full flex-wrap rounded-md bg-[#F5F5F5] lg:w-2/3">
                   <div className="border-box w-full rounded-md bg-black sm:w-52">
-                    <Link to={`/cardescription/${item.car_id}`}>
-                      <img
-                        src={`${baseUrl}/image/car/${item.car_images[0]}`}
-                        alt="List1"
-                        className="h-full w-full rounded-md object-none"
-                      />
-                    </Link>
+                    <img
+                      src={`${baseUrl}/image/car/${item.car_images[0]}`}
+                      alt="List1"
+                      className="h-full w-full rounded-md object-none"
+                    />
                   </div>
                   <div className="w-full px-6 py-3 text-justify sm:w-4/6">
                     <div className="w-full text-justify sm:w-5/6">

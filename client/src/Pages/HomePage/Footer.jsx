@@ -1,5 +1,5 @@
 import React from "react";
-import { Logo } from "../../assets/img";
+import Logo from "../../assets/img/BrandLogo.png";
 
 const Footer = () => {
   return (
@@ -17,7 +17,7 @@ const Footer = () => {
           ></path>
         </svg>
         <div className="expand h-fit w-full bg-[#8D021F] pb-10">
-          <img src={Logo} alt="" className="mx-10 w-60" />
+          <img src={Logo} alt="" className="mx-10 w-80" />
           <div className="flex h-fit flex-wrap justify-evenly gap-14 px-14">
             <div className="w-content leading-10 text-gray-300">
               <h1 className="mb-5 text-[2rem] font-semibold text-white">
@@ -44,7 +44,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="copyright grid place-items-center text-white">
-            <small className="m-auto mt-5">Copyright &copy; 2023</small>
+            <small className="m-auto mt-5">Copyright &copy; 2024</small>
           </div>
         </div>
       </div>

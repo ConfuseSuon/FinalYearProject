@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import {} from '../../App.css';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import {} from "../../App.css";
+import { baseUrl, doGet } from "../../Services/Axios";
 import {
   image1,
   image2,
@@ -8,15 +9,14 @@ import {
   image4,
   image5,
   image6,
-} from '../../assets/img';
-import { baseUrl, doGet } from '../../Services/Axios';
-import Card from './Card';
+} from "../../assets/img";
+import Card from "./Card";
 
 const Trending = () => {
   const [trending, setTrending] = useState([]);
   const handleGetOfferHotels = async () => {
     try {
-      const response = await doGet('/hotel/all');
+      const response = await doGet("/hotel/all");
 
       setTrending(
         response.data && response.data.length > 0
@@ -40,7 +40,7 @@ const Trending = () => {
       <h1 className="my-10 text-center text-2xl sm:text-4xl md:text-5xl">
         Local place and attraction
       </h1>
-      <div className="grid-template-column">
+      <div className="grid-template-column mb-20">
         {trending.map((item) => (
           <Card item={item} />
         ))}

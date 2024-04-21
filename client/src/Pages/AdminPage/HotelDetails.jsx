@@ -88,7 +88,7 @@ const HotelDetails = () => {
       <div className="mt-32 mr-10 h-fit flex-wrap justify-between pl-20">
         <div className="mx-auto">
           <h1 className="font-lato text-2xl font-bold leading-8 tracking-wider">
-            Hotel Detailss
+            Hotel Details
           </h1>
           <p className="mb-8">Add image</p>
         </div>
@@ -247,13 +247,11 @@ const HotelDetails = () => {
           <div className="mt-8 flex flex-wrap justify-between gap-2">
             <div className="flex w-full flex-wrap rounded-md bg-[#F5F5F5] lg:w-2/3">
               <div className="border-box w-full rounded-md sm:w-[18vw]">
-                <Link to={`/hoteldescription/${item.hotel_id}`}>
-                  <img
-                    src={`${baseUrl}/image/hotel/${item.hotelImages[0]}`}
-                    alt="List1"
-                    className="h-full w-full rounded-md object-none"
-                  />
-                </Link>
+                <img
+                  src={`${baseUrl}/image/hotel/${item.hotelImages[0]}`}
+                  alt="List1"
+                  className="h-full w-full rounded-md object-none"
+                />
               </div>
               <div className="w-full px-6 py-3 text-justify sm:w-3/6">
                 <h1 className="font-semibold">{item.name}</h1>

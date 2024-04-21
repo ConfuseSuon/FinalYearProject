@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
-import { WhiteLogo } from "../../assets/img";
+import BrandWhiteLogo from "../../assets/img/BrandLogo.png";
+
 import coverPic from "../../assets/img/coverPic.jpg";
 import { Untitled } from "../../assets/video";
 
@@ -118,9 +119,9 @@ const TopPage = () => {
         </div>
         <div className="absolute top-4 z-20 flex w-full items-center justify-between">
           <img
-            src={WhiteLogo}
+            src={BrandWhiteLogo}
             alt="logo"
-            className="z-20 w-36 text-white sm:w-52"
+            className="z-20 w-36 text-white sm:w-80"
           />
           <div className="flex w-full justify-around gap-5 sm:w-3/12 md:w-3/12 lg:w-2/12">
             {/* <div

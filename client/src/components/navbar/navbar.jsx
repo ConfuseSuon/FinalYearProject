@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Logo } from '../../assets/img';
-import { getUserEmailFromLocalStorage } from '../../Services/Helpers';
+import React from "react";
+import { Link } from "react-router-dom";
+import { getUserEmailFromLocalStorage } from "../../Services/Helpers";
+import Logo from "../../assets/img/BrandSecLogo.png";
 
 const Navbar = () => {
   return (
@@ -15,8 +15,8 @@ const Navbar = () => {
         </div>
       </nav>
       <div className="pl-4 md:px-16">
-        <div className="w-40">
-          <Link to={'/'}>
+        <div className="w-48">
+          <Link to={"/"}>
             <img src={Logo} alt="Logo" />
           </Link>
         </div>

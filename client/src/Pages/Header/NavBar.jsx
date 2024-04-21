@@ -5,7 +5,8 @@ import {
   isRemoveUserFromLocalStorage,
 } from "../../Services/Helpers";
 import { useCurrentUserContextConsumer } from "../../Services/useUserLocation";
-import { Logo, profile } from "../../assets/img";
+import { profile } from "../../assets/img";
+import BrandSecLogo from "../../assets/img/BrandSecLogo.png";
 
 const NavBar = () => {
   const { options, location, setLocation } = useCurrentUserContextConsumer();
@@ -32,12 +33,12 @@ const NavBar = () => {
       <div className="place-items-left grid bg-red-300">
         <Link to={"/"}>
           <img
-            src={Logo}
+            src={BrandSecLogo}
             alt="logo"
-            className="absolute top-3 left-16 w-52 text-black"
+            className="absolute top-3 left-16 w-72 text-black"
           />
         </Link>
-        <div
+        {/* <div
           className={
             display === true
               ? "fixed z-40 hidden h-screen w-screen place-items-center bg-black bg-opacity-75"
@@ -95,8 +96,8 @@ const NavBar = () => {
               />
             </div>
           </div>
-        </div>
-        <div
+        </div> */}
+        {/* <div
           className="w-cotent absolute top-24 right-[10rem] z-50 flex cursor-pointer items-center justify-evenly rounded-xl bg-[#F5F5F5] px-2 py-1 sm:top-14 sm:right-[11rem] md:right-[13rem]"
           onClick={onClickHandler}
         >
@@ -109,7 +110,7 @@ const NavBar = () => {
               options.filter((item) => item.country === location)[0].currency}
             &emsp;&emsp;&#x25BC;
           </span>
-        </div>
+        </div> */}
         <div className="absolute top-24 right-[4rem] w-20 rounded-xl bg-[#F5F5F5] px-2 py-1 text-black sm:top-14 sm:right-[5rem] md:right-[7rem] lg:right-[7rem]">
           <p className="px-5">{getUserFromLocalStorage()}</p>
         </div>
@@ -127,25 +128,12 @@ const NavBar = () => {
                 : "top-15 absolute right-5 z-20 grid w-max rounded-lg bg-white py-2 shadow shadow-black"
             }
           >
-            <Link
-              to="/profile"
+            <h2
               className="font-regular cursor-pointer rounded-lg px-5 py-1 text-lg hover:bg-[#F5F5F5]"
+              onClick={handlegOut}
             >
-              View Profile
-            </Link>
-            <h2 className="font-regular cursor-pointer rounded-lg px-5 py-1 text-lg hover:bg-[#F5F5F5]">
-              Booking
+              Sign Out
             </h2>
-            {getUserFromLocalStorage() ? (
-              <h2
-                className="font-regular cursor-pointer rounded-lg px-5 py-1 text-lg hover:bg-[#F5F5F5]"
-                onClick={handlegOut}
-              >
-                Sign Out
-              </h2>
-            ) : (
-              ""
-            )}
           </div>
         </div>
       </div>

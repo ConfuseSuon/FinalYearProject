@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import React, { useEffect, useState } from "react";
+import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import { useSwiper } from 'swiper/react';
+import { useSwiper } from "swiper/react";
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import { image1, image2, image3, image4 } from '../../assets/img';
-import { baseUrl, doGet } from '../../Services/Axios';
-import { Link } from 'react-router-dom';
-import Card from './Card';
+import { Link } from "react-router-dom";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import { baseUrl, doGet } from "../../Services/Axios";
+import { image1, image2, image3, image4 } from "../../assets/img";
+import CommonCard from "../../components/CommonCar";
 
 // SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
@@ -20,7 +20,7 @@ const Suggested = () => {
   const [hotels, setHotels] = useState([]);
   const handleGetOfferHotels = async () => {
     try {
-      const response = await doGet('/hotel/all');
+      const response = await doGet("/hotel/all");
 
       setHotels(response.data);
     } catch (error) {}
@@ -33,33 +33,33 @@ const Suggested = () => {
     {
       id: 1,
       image: image1,
-      place: 'Pokhara',
-      restName: 'Pokha Restro',
-      review: '450',
+      place: "Pokhara",
+      restName: "Pokha Restro",
+      review: "450",
       price: 10000,
     },
     {
       id: 1,
       image: image2,
-      place: 'Pokhara',
-      restName: 'Pokha Restro',
-      review: '450',
+      place: "Pokhara",
+      restName: "Pokha Restro",
+      review: "450",
       price: 10000,
     },
     {
       id: 1,
       image: image3,
-      place: 'Pokhara',
-      restName: 'Pokha Restro',
-      review: '450',
+      place: "Pokhara",
+      restName: "Pokha Restro",
+      review: "450",
       price: 10000,
     },
     {
       id: 1,
       image: image4,
-      place: 'Pokhara',
-      restName: 'Pokha Restro',
-      review: '450',
+      place: "Pokhara",
+      restName: "Pokha Restro",
+      review: "450",
       price: 10000,
     },
   ];
@@ -89,7 +89,11 @@ const Suggested = () => {
         >
           {hotels.map((item) => (
             <SwiperSlide key={item}>
-              <Card item={item} />
+              <Link to={`/hoteldescription/${item.hotel_id}`}>
+                <div className="cursor-pointer rounded-lg bg-[#F5F5F5] shadow-md hover:bg-slate-500 hover:bg-opacity-50">
+                  <CommonCard item={item} calling={"suggested"} />
+                </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

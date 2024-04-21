@@ -1,39 +1,39 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { NoTextLogo } from '../../assets/img';
-import Navbar from '../../components/navbar/navbar';
-import InputField from '../../ResuableComponents/InputField';
-import { doPost } from '../../Services/Axios';
-import { setForgotEmailToLocalStorage } from '../../Services/Helpers';
-import { useForm } from '../../Services/useForm';
-import Button from '../../UI/Button/Button';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import InputField from "../../ResuableComponents/InputField";
+import { doPost } from "../../Services/Axios";
+import { setForgotEmailToLocalStorage } from "../../Services/Helpers";
+import { useForm } from "../../Services/useForm";
+import Button from "../../UI/Button/Button";
+import NoTextLogo from "../../assets/img/iconLogo.png";
+import Navbar from "../../components/navbar/navbar";
 
 const SendMail = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const initialState = {
-    email: '',
+    email: "",
   };
   const { errors, states, validate, handleChange } = useForm(initialState);
   const handleSubmit = async () => {
     try {
       if (validate()) {
-        const resp = await doPost('user/forgotpassword', {
+        const resp = await doPost("user/forgotpassword", {
           email: states.email,
         });
-        if (resp.data === 'Account not verified') {
+        if (resp.data === "Account not verified") {
           return setError(resp.data);
         }
         setForgotEmailToLocalStorage(states.email);
-        navigate('/otp', {
-          state: 'fp',
+        navigate("/otp", {
+          state: "fp",
         });
       }
     } catch (error) {
       if (
         error.response &&
         error.response.data &&
-        typeof error.response.data === 'string'
+        typeof error.response.data === "string"
       ) {
         setError(error.response.data);
       }
@@ -51,24 +51,24 @@ const SendMail = () => {
             </div>
           </div>
           <div className="flex items-center justify-start gap-4 pr-8  ">
-            <div className="w-32">
+            <div className="w-40">
               <img src={NoTextLogo} alt="Logo" />
             </div>
           </div>
           <InputField
-            name={'email'}
+            name={"email"}
             handleChange={handleChange}
             title="Email"
             required={true}
             placeholder="Please Enter Email"
           />
-          {(errors.email !== '' || error) && (
+          {(errors.email !== "" || error) && (
             <div className="mt-[-.2rem] text-sm text-red-600">
               {errors.email || error}
             </div>
           )}
           <div className="w-1/2">
-            <Button text={'Continue'} onClick={handleSubmit} />
+            <Button text={"Continue"} onClick={handleSubmit} />
           </div>
         </div>
       </div>

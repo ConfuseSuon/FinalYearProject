@@ -119,21 +119,25 @@ const CarDes = () => {
         JSON.stringify(enumerateDaysBetweenDates(startDate, endDate))
       );
       localStorage.setItem("carId", id);
-      console.log(carData?.cost, "hi");
       const response = await axios.post(
         "https://a.khalti.com/api/v2/epayment/initiate/",
         JSON.stringify({
-          return_url: `http://localhost:3000/hoteldescription/${id}`,
-          website_url: `http://localhost:3000/hoteldescription/${id}`,
+          return_url: `http://localhost:3000/cardescription/${id}`,
+          website_url: `http://localhost:3000/cardescription/${id}`,
           amount: carData?.cost * 100,
           purchase_order_id: id,
           purchase_order_name: "Car Booking",
+          customer_info: {
+            name: "Ram Bahadur",
+            email: "test@khalti.com",
+            phone: "9800000001",
+          },
         }),
         {
           url: "https://a.khalti.com/api/v2/epayment/initiate/",
           method: "POST",
           headers: {
-            Authorization: "Key 55e69f0e6cab4414a1733d0f2e858041",
+            Authorization: "Key 6df713ac3fe440f080162831db9891e1",
             "Content-Type": "application/json",
           },
         }
@@ -148,7 +152,7 @@ const CarDes = () => {
 
   const verifyBooking = async () => {
     const carData = {
-      room_id: localStorage.getItem("carData"),
+      car_id: localStorage.getItem("carData"),
       bookedDays: JSON.parse(localStorage.getItem("carBookedDaysData")),
     };
     const response = await doPost("/car/rentcar", { ...carData });

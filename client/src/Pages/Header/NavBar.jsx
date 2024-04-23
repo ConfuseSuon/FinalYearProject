@@ -44,7 +44,7 @@ const NavBar = () => {
           <p className="px-5">{getUserFromLocalStorage()}</p>
         </div>
         <div className="absolute top-20 right-[.1rem] sm:top-12 sm:right-[1rem] md:right-[3rem]">
-          <Avatar size={48} icon={<UserOutlined />} />
+          <Avatar size={48} icon={<UserOutlined />} onClick={onClickHandler1} />
           <div
             className={
               show === true

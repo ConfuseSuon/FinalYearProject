@@ -1,9 +1,11 @@
 import { Elements, PaymentElement } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { Badge } from "antd";
 import axios from "axios";
 import KhaltiCheckout from "khalti-checkout-web";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+
 import { useLocation, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import "../../App.css";
@@ -19,6 +21,7 @@ import Footer from "../HomePage/Footer";
 let stripePromise = loadStripe(
   "pk_test_51MA1w7G9ZwN3X5brmLc5kTaWz4mOXtxnMCF7Upjr5pu8EbsF6W35HXWOrB0B4bBNUNGmllIftuiNWZVyGk4MrgYy00CReN2tEX"
 );
+
 const HotelDes = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -40,15 +43,19 @@ const HotelDes = () => {
 
   const [room, setRoom] = useState();
   const [cost, setCost] = useState(0);
+  const [offer, setOffer] = useState(0);
   const [startDate, setStartDate] = useState(moment().format("YYYY-MM-DD"));
   const [endDate, setEndDate] = useState(
     moment().add(1, "days").format("YYYY-MM-DD")
   );
+  const [hotelData, setHotelData] = useState(null);
 
-  const onRoomChangeHandler = (event) => {
+  const onRoomChangeHandler = (event, item) => {
     setRoom(event.target.value.split(",")[0]);
     setCost(+event.target.value.split(",")[1]);
+    setOffer(+event.target.value.split(",")[2]);
   };
+
   const [hotel, setHotel] = useState();
   const [refresh, setRefresh] = useState(false);
 
@@ -105,6 +112,19 @@ const HotelDes = () => {
     }
   }, [status]); //
 
+  const discount = () => {
+    const totalDays = enumerateDaysBetweenDates(startDate, endDate).length - 1;
+    console.log(totalDays);
+    if (!offer) return cost * totalDays * 100;
+    if (offer) {
+      const discountAmount = (cost * offer) / 100;
+      const totalAmount = cost - discountAmount;
+      return totalAmount * totalDays * 100;
+    }
+  };
+
+  console.log(discount(), "filed");
+
   const khaltiCheckout = async () => {
     try {
       if (!room) return toast.error("please select room");
@@ -119,7 +139,7 @@ const HotelDes = () => {
         JSON.stringify({
           return_url: `http://localhost:3000/hoteldescription/${id}`,
           website_url: `http://localhost:3000/hoteldescription/${id}`,
-          amount: cost * 100,
+          amount: discount(),
           purchase_order_id: id,
           purchase_order_name: "Hotel Booking",
           customer_info: {
@@ -275,66 +295,74 @@ const HotelDes = () => {
               Book Now
             </button>
           </div>
-          <div className="">
-            <div className="flex flex-wrap justify-around gap-10 bg-light-gray py-5">
-              <div className="flex-col gap-3">
-                <p className="text-lg font-semibold">Check in</p>
-                <input
-                  type="date"
-                  name=""
-                  id=""
-                  className="w-44 rounded border-l-8 border-l-green-400 p-3"
-                  value={startDate}
-                  onChange={handleStartDate}
-                />
-              </div>
-              <div className="">
-                <p className="text-lg font-semibold "> Check out</p>
-                <input
-                  type="date"
-                  name="check"
-                  id="check "
-                  className="w-44 rounded border-l-8 border-l-red-600 p-3"
-                  value={endDate}
-                  onChange={handleEndDate}
-                />
-              </div>
+          <Badge.Ribbon
+            text={offer ? `${offer}% off` : ""}
+            color="#8d031f"
+            placement="end"
+          >
+            <div className="">
+              <div className="flex flex-wrap justify-around gap-10 bg-light-gray py-5">
+                <div className="flex-col gap-3">
+                  <p className="text-lg font-semibold">Check in</p>
+                  <input
+                    type="date"
+                    name=""
+                    id=""
+                    className="w-44 rounded border-l-8 border-l-green-400 p-3"
+                    value={startDate}
+                    onChange={handleStartDate}
+                  />
+                </div>
+                <div className="">
+                  <p className="text-lg font-semibold "> Check out</p>
+                  <input
+                    type="date"
+                    name="check"
+                    id="check "
+                    className="w-44 rounded border-l-8 border-l-red-600 p-3"
+                    value={endDate}
+                    onChange={handleEndDate}
+                  />
+                </div>
 
-              <div className="w-cotent top-14 right-[20rem] flex-col items-center justify-evenly rounded-xl bg-[#F5F5F5]">
-                <p className="text-lg font-semibold"> Rooms </p>
-                <select
-                  className="w-44 rounded border bg-white p-3 outline-none"
-                  onChange={(e) => onRoomChangeHandler(e)}
-                  value={room + "," + cost}
-                >
-                  <option value={undefined}>Select</option>
-                  {hotel.room
-                    .filter((item) => {
-                      return (
-                        item.bookedDays.filter((item) => {
-                          return moment(item).isBetween(
-                            moment(startDate),
-                            moment(endDate),
-                            undefined,
-                            "[]"
-                          );
-                        }).length === 0
-                      );
-                    })
-                    .map((item, index) => {
-                      return (
-                        <option
-                          key={index}
-                          value={item.room_id + "," + item.cost}
-                        >
-                          Hotel no. {item.room_number}
-                        </option>
-                      );
-                    })}
-                </select>
+                <div className="w-cotent top-14 right-[20rem] flex-col items-center justify-evenly rounded-xl bg-[#F5F5F5]">
+                  <p className="text-lg font-semibold"> Rooms </p>
+                  <select
+                    className="w-44 rounded border bg-white p-3 outline-none"
+                    onChange={(e) => onRoomChangeHandler(e)}
+                    value={room + "," + cost + "," + offer}
+                  >
+                    <option value={undefined}>Select</option>
+                    {hotel.room
+                      .filter((item) => {
+                        return (
+                          item.bookedDays.filter((item) => {
+                            return moment(item).isBetween(
+                              moment(startDate),
+                              moment(endDate),
+                              undefined,
+                              "[]"
+                            );
+                          }).length === 0
+                        );
+                      })
+                      .map((item, index) => {
+                        return (
+                          <option
+                            key={index}
+                            value={
+                              item.room_id + "," + item.cost + "," + item.offer
+                            }
+                          >
+                            Hotel no. {item.room_number}
+                          </option>
+                        );
+                      })}
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
+          </Badge.Ribbon>
           <div>
             <div className="">
               <h1 className="my-2 mt-5 text-2xl font-semibold ">

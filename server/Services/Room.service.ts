@@ -1,18 +1,18 @@
+import crypto, { randomUUID } from "crypto";
+import moment, { Moment } from "moment";
 import { Mongoose } from "mongoose";
-import logger from "../config/logger/logger";
+import { BookingModel } from "../Model/Booking.model";
 import { Hotel, HotelModel } from "../Model/Hotel.model";
 import { Room, RoomModel } from "../Model/Room.model";
-import { TRoom } from "../Types/types";
+import { UserModel } from "../Model/User.model";
 import { addOfferType, checkRoomType } from "../Schema/Room.schema";
-import moment, { Moment } from "moment";
+import { TRoom } from "../Types/types";
 import {
   sendBookingMail,
   sendMail,
   sendMessageFromMail,
 } from "../config/Mailer/Mailer";
-import { UserModel } from "../Model/User.model";
-import crypto, { randomUUID } from "crypto";
-import { BookingModel } from "../Model/Booking.model";
+import logger from "../config/logger/logger";
 import { sendMailService } from "./User.service";
 
 export async function addRoomService({
@@ -96,7 +96,7 @@ export async function addRoomOfferService({
         hotel_id: room?.hotel_id,
       });
       for (let i = 0; i < users.length; i++) {
-           sendMessageFromMail(
+        sendMessageFromMail(
           `Have you checked out new Offer of ${offer} in ${room?.room_number} of hotel:${hotel?.name} `,
           "Willowdale Notification service",
           users[i].email,
@@ -197,13 +197,19 @@ export async function bookRoomService(
       const room = await RoomModel.findOne({
         room_id: room_id,
       });
+      const withOffer = (cost: number, offer: any, totalDays: number) => {
+        if (!offer) return cost * totalDays;
+        const discountAmount = (cost * +offer) / 100;
+        const totalAmount = cost - +discountAmount;
+        return totalAmount * totalDays;
+      };
       const booking =
         room?.cost &&
         (await BookingModel.create({
           booking_id: crypto.randomUUID(),
           booker_id: booker,
           days: days,
-          cost: room?.cost * days.length,
+          cost: withOffer(room?.cost, room.offer, days.length - 1),
           room_id: room_id,
         }));
 

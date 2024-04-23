@@ -1,9 +1,9 @@
-import { UserModel, User } from "../Model/User.model";
-import crypto from "crypto";
 import bcrypt from "bcrypt";
-import mongoose, { MongooseError } from "mongoose";
+import crypto from "crypto";
+import { response } from "express";
 import jwt from "jsonwebtoken";
-import config from "../config/config";
+import mongoose, { MongooseError } from "mongoose";
+import { User, UserModel } from "../Model/User.model";
 import {
   forgotPasswordBodyType,
   loginBodyType,
@@ -13,8 +13,8 @@ import {
   tokenBodyType,
   verifyfpotpBodyType,
 } from "../Schema/User.schema";
-import { response } from "express";
 import { sendMail, sendMessageMail } from "../config/Mailer/Mailer";
+import config from "../config/config";
 
 export async function createUserService({
   email,
@@ -257,7 +257,7 @@ export async function sendMailService(
     message: ${message}`),
     title,
     "sagar.khadka2001@gmail.com",
-    "nischal0407@xavier.edu.np"
+    "sinupun50@gmail.com"
   );
 
   return {

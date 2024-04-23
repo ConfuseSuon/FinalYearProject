@@ -1,6 +1,11 @@
-import logger from "../config/logger/logger";
-import { CarModel, Car } from "../Model/Car.model";
 import crypto from "crypto";
+import fs from "fs";
+import moment from "moment";
+import mongoose from "mongoose";
+import { Car, CarModel } from "../Model/Car.model";
+import { CarBookingModel } from "../Model/CarBooking.model";
+import { CarReview, CarReviewModel } from "../Model/CarReview.model";
+import { UserModel } from "../Model/User.model";
 import {
   addCarBodyType,
   cancelRentBodyType,
@@ -9,14 +14,9 @@ import {
   rentCarBodyType,
   updateCarBodyType,
 } from "../Schema/Car.schema";
-import mongoose from "mongoose";
-import fs from "fs";
 import { addCarReviewBodyType } from "../Schema/CarReview.schema";
-import { CarReview, CarReviewModel } from "../Model/CarReview.model";
-import { UserModel } from "../Model/User.model";
-import { CarBookingModel } from "../Model/CarBooking.model";
 import { sendBookingMail } from "../config/Mailer/Mailer";
-import moment from "moment";
+import logger from "../config/logger/logger";
 
 export async function addCarService({
   car_type,
@@ -431,7 +431,7 @@ export async function rentCarService({
           undefined,
           findCar.car_number,
           email,
-          "nischal0407@xavier.edu.np"
+          "sinupun50@gmail.com"
         );
 
         return {

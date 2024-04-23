@@ -221,7 +221,7 @@ export async function bookRoomService(
           findRoom.room_number,
           undefined,
           response?.email,
-          "nischal0407@xavier.edu.np"
+          "sinupun50@gmail.com"
         );
 
       return {

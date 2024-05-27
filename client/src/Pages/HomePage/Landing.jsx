@@ -1,8 +1,4 @@
-import Chat from "../../components/ChatBox/Chat";
-
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { doGet } from "../../Services/Axios";
+import React, { useState } from "react";
 import Banner from "./Banner";
 import Footer from "./Footer";
 import Offer from "./Offer";
@@ -12,8 +8,6 @@ import Trending from "./Trending";
 
 const Landing = () => {
   const [show, setshow] = useState(false);
-
-  const handleClose = () => setshow(false);
 
   return (
     <>
@@ -25,13 +19,6 @@ const Landing = () => {
       </div>
       <Suggested />
       <Footer />
-      {/* <div className="fixed bottom-5 left-5 z-50">
-        <Chat onClose={handleClose} visible={show} />
-        <i
-          className="fa-solid fa-comment cursor-pointer text-3xl text-primary sm:text-4xl md:text-6xl"
-          onClick={() => setshow((prev) => !prev)}
-        ></i>
-      </div> */}
     </>
   );
 };

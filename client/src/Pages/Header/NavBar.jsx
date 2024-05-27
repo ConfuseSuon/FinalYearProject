@@ -40,7 +40,7 @@ const NavBar = () => {
             className="absolute top-3 left-16 w-72 text-black"
           />
         </Link>
-        <div className="absolute top-24 right-[4rem] w-20 rounded-xl bg-[#F5F5F5] px-2 py-1 text-black sm:top-14 sm:right-[5rem] md:right-[7rem] lg:right-[7rem]">
+        <div className="absolute top-24 right-[4rem] w-20 rounded-xl px-2 py-1 text-black sm:top-14 sm:right-[5rem] md:right-[7rem] lg:right-[7rem]">
           <p className="px-5">{getUserFromLocalStorage()}</p>
         </div>
         <div className="absolute top-20 right-[.1rem] sm:top-12 sm:right-[1rem] md:right-[3rem]">

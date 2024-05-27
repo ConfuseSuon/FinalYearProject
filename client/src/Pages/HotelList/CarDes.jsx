@@ -375,27 +375,7 @@ const CarDes = () => {
                 </ul>
               </div>
             </div>
-            <div className="">
-              <h1 className="my-3 mt-7 text-2xl font-semibold ">
-                Plus Your Hire Includes
-              </h1>
-              <div className="flex flex-wrap justify-start gap-10 bg-light-gray py-5">
-                <ul className="">
-                  {car.hire_includes.map((item) =>
-                    item.split(",").map((el) => (
-                      <li className="flex">
-                        <img
-                          src={ring}
-                          alt="free things"
-                          className="h-4 px-4"
-                        />
-                        {el}
-                      </li>
-                    ))
-                  )}
-                </ul>
-              </div>
-            </div>
+
             <div className="">
               <h1 className="py-5 pt-10 text-2xl font-semibold ">Reviews</h1>
               {car.review_permission !== "false" ? (

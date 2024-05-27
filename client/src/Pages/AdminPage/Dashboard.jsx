@@ -157,8 +157,8 @@ const Dashboard = () => {
   return (
     <>
       <NavBar />
-      <div className="w-cotent absolute top-14 right-[4rem] flex cursor-pointer items-center justify-evenly rounded-xl bg-[#F5F5F5] px-2 py-1 sm:right-[22rem] md:right-[25rem]"></div>
-      <div className="w-cotent absolute top-14 right-[13rem] flex cursor-pointer items-center justify-evenly rounded-xl bg-[#F5F5F5] px-2 py-1 sm:right-[31rem] md:right-[34rem]">
+
+      <div className="w-cotent absolute top-14 right-[13rem] flex  px-2 py-1 sm:right-[31rem] md:right-[34rem]">
         {/* <SwitchHC /> */}
       </div>
       <SideBar />

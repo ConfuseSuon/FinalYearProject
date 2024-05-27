@@ -20,7 +20,6 @@ import CarBook from "./Pages/HotelList/CarBook";
 import CarDes from "./Pages/HotelList/CarDes";
 import Hotel from "./Pages/HotelList/Hotel";
 import HotelDes from "./Pages/HotelList/HotelDes";
-import Success from "./Pages/HotelList/Success";
 import LocalOffer from "./Pages/LocalOfferPage/LocalOffer";
 import ResetPassword from "./Pages/ResetPassword/ResetPassword";
 import SendMail from "./Pages/SendMail/SendMail";
@@ -70,7 +69,6 @@ function App() {
                     <Route path="cardashboard" element={<CarDashboard />} />
                   </Route>
                   <Route path="/carbook" element={<CarBook />} />
-                  <Route path="/success" element={<Success />} />
                 </Routes>
               </FilterProvider>
             </UserLocationProvider>

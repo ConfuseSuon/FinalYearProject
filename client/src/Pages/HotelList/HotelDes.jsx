@@ -15,12 +15,8 @@ import { getUserIdFromLocalStorage } from "../../Services/Helpers";
 import { useForm } from "../../Services/useForm";
 import Button from "../../UI/Button/Button";
 import { Me, Room1, Room2, Room3, Room4, ring } from "../../assets/img";
-import getStripe from "../../getStripe";
 import NavBar from "../Header/NavBar";
 import Footer from "../HomePage/Footer";
-let stripePromise = loadStripe(
-  "pk_test_51MA1w7G9ZwN3X5brmLc5kTaWz4mOXtxnMCF7Upjr5pu8EbsF6W35HXWOrB0B4bBNUNGmllIftuiNWZVyGk4MrgYy00CReN2tEX"
-);
 
 const HotelDes = () => {
   const navigate = useNavigate();

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { div } from 'react-router-dom';
-import Filter from '../../components/Filter/Filter';
-import { useFilterConsumer } from '../../Services/useFilter';
-import Weather from './Weather';
+import React, { useState } from "react";
+import { div } from "react-router-dom";
+import { useFilterConsumer } from "../../Services/useFilter";
+import Filter from "../../components/Filter/Filter";
+import Weather from "./Weather";
 
 const Switch = () => {
   const star = useFilterConsumer();

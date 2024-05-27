@@ -3,13 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import InputField from "../../ResuableComponents/InputField";
 import { doPost } from "../../Services/Axios";
 import Button from "../../UI/Button/Button";
-import Navbar from "../navbar/navbar";
 
-import {
-  setAccessTokenFromLocalStorage,
-  setUnverifiedEmailToLocalStorage,
-  setUsernameToLocalStorage,
-} from "../../Services/Helpers";
+import { setUnverifiedEmailToLocalStorage } from "../../Services/Helpers";
 import loginImage from "../../assets/img/loginImage.jpg";
 
 import { useForm } from "../../Services/useForm";
@@ -162,7 +157,7 @@ const SignUp = () => {
                     <Link
                       to="/login"
                       className="
-                      cursor-pointer font-semibold text-blue-200 text-primary hover:underline"
+                      cursor-pointer font-semibold text-primary hover:underline"
                     >
                       Sign In
                     </Link>

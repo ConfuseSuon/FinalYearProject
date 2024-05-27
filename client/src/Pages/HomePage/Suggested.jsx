@@ -81,11 +81,6 @@ const Suggested = () => {
             1000: { slidesPerView: 3 },
             1366: { slidesPerView: 4 },
           }}
-
-          // pagination={{ clickable: true }}
-          // scrollbar={{ draggable: true }}
-          // onSlideChange={() => console.log('slide change')}
-          // onSwiper={(swiper) => console.log(swiper)}
         >
           {hotels.map((item) => (
             <SwiperSlide key={item}>

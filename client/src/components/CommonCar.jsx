@@ -1,9 +1,4 @@
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  EnvironmentOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { EnvironmentOutlined } from "@ant-design/icons";
 import { Avatar, Card, Flex } from "antd";
 import React from "react";
 import { baseUrl } from "../Services/Axios";
@@ -12,25 +7,6 @@ const { Meta } = Card;
 
 const CommonCard = ({ item, calling }) => {
   return (
-    // <Card
-    //   style={{
-    //     width: 300,
-    //     background: "#f5f5f5",
-    //   }}
-    //   hoverable
-    // >
-    //   <Flex>
-    //     <Meta title={item?.name} description={item?.location} />
-    //     {item?.hotelImages[0] ? (
-    //       <img
-    //         size={"large"}
-    //         shape="square"
-    //         src={`${baseUrl}/image/hotel/${item.hotelImages[0]}`}
-    //         style={{ height: "5rem" }}
-    //       />
-    //     ) : null}
-    //   </Flex>
-    // </Card>
     <Card
       style={{
         width: calling === "suggested" ? 430 : 300,

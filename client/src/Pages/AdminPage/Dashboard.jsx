@@ -10,10 +10,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { toast } from "react-toastify";
 import { doGet } from "../../Services/Axios";
-import { useCurrentTypeConsumer } from "../../Services/useType";
 import NavBar from "../Header/NavBar";
 import SideBar from "../Header/SideBar";
-import SwitchHC from "../Header/SwitchHC";
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 

@@ -1,7 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { getUserEmailFromLocalStorage } from "../../Services/Helpers";
-import Logo from "../../assets/img/PrimaryBrandLogo.png";
 
 const Navbar = () => {
   return (

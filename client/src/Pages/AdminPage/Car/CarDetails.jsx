@@ -4,8 +4,6 @@ import { toast } from "react-toastify";
 import InputField from "../../../ResuableComponents/InputField";
 import { baseUrl, doDelete, doGet, doPost } from "../../../Services/Axios";
 import { useForm } from "../../../Services/useForm";
-import { Logo, image12 } from "../../../assets/img";
-import SwitchHC from "../../Header/SwitchHC";
 
 const CarDetails = () => {
   const [refresh, setRefresh] = useState([]);

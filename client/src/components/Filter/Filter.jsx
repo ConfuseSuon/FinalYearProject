@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router';
-import { NoTextLogo } from '../../assets/img/index';
-import RangeSilder from '../../ResuableComponents/RangleSider';
-import { useFilterConsumer } from '../../Services/useFilter';
-import Button from '../../UI/Button/Button';
+import React from "react";
+import { useLocation } from "react-router";
+import RangeSilder from "../../ResuableComponents/RangleSider";
+import { useFilterConsumer } from "../../Services/useFilter";
+import Button from "../../UI/Button/Button";
+import { NoTextLogo } from "../../assets/img/index";
 const Filter = () => {
   const location = useLocation();
   const filter = useFilterConsumer();
@@ -49,7 +49,7 @@ const Filter = () => {
                 step={100}
               />
             </div>
-            {location.pathname === '/search/hotel' && (
+            {location.pathname === "/search/hotel" && (
               <div>
                 <div>Ammenities</div>
                 <ul>
@@ -57,7 +57,7 @@ const Filter = () => {
                     <input
                       type="checkbox"
                       className="accent-primary"
-                      value={'Free wifi'}
+                      value={"Free wifi"}
                       name=""
                       id=""
                       onChange={(e) => handleSelectFeatures(e)}
@@ -68,7 +68,7 @@ const Filter = () => {
                     <input
                       type="checkbox"
                       className="accent-primary"
-                      value={'Bar'}
+                      value={"Bar"}
                       name=""
                       id=""
                       onChange={(e) => handleSelectFeatures(e)}
@@ -79,7 +79,7 @@ const Filter = () => {
                     <input
                       type="checkbox"
                       className="accent-primary"
-                      value={'pool'}
+                      value={"pool"}
                       name=""
                       id=""
                       onChange={(e) => handleSelectFeatures(e)}
@@ -90,7 +90,7 @@ const Filter = () => {
                     <input
                       type="checkbox"
                       className="accent-primary"
-                      value={'Lakeside'}
+                      value={"Lakeside"}
                       name=""
                       id=""
                       onChange={(e) => handleSelectFeatures(e)}
@@ -101,7 +101,7 @@ const Filter = () => {
                     <input
                       type="checkbox"
                       className="accent-primary"
-                      value={'Parking'}
+                      value={"Parking"}
                       name=""
                       id=""
                       onChange={(e) => handleSelectFeatures(e)}
@@ -112,7 +112,7 @@ const Filter = () => {
               </div>
             )}
             <div className="pt-4">
-              <Button text={'Apply Filter'} onClick={handleApplyFilter} />
+              <Button text={"Apply Filter"} onClick={handleApplyFilter} />
             </div>
           </aside>
         </div>

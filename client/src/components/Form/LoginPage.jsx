@@ -6,14 +6,12 @@ import {
   setAdminAccessTokenFromLocalStorage,
   setAdminUsernameToLocalStorage,
   setUnverifiedEmailToLocalStorage,
-  setUserDetailsToLocalStorage,
   setUserEmailToLocalStorage,
   setUsernameToLocalStorage,
 } from "../../Services/Helpers";
 import { useForm } from "../../Services/useForm";
 import Logo from "../../assets/img/SecondaryBrandLogo.png";
 import loginImage from "../../assets/img/loginImage.jpg";
-import Navbar from "../navbar/navbar";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -231,7 +229,6 @@ const LoginPage = () => {
                 </p>
               </div>
             </form>
-            {/* 2ee8b29407ca0849a43eea964c807b20b59e263c */}
           </div>
         </div>
         <div className="absolute top-10 left-10">

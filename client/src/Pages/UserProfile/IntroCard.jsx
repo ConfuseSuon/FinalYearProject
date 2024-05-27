@@ -1,6 +1,6 @@
-import moment from 'moment';
-import React, { useState } from 'react';
-import PlaceCard from './PlaceCard';
+import moment from "moment";
+import React, { useState } from "react";
+import PlaceCard from "./PlaceCard";
 
 const IntroCard = ({ user }) => {
   const [display, setDisplay] = useState(false);
@@ -13,9 +13,9 @@ const IntroCard = ({ user }) => {
       {display === true && (
         <div className="fixed top-0 z-50 grid h-full w-full place-items-center bg-black bg-opacity-75">
           <div className="grid w-[25rem] gap-3 rounded-md bg-white p-5 px-10">
-            <div className="flex items-center relative">
+            <div className="relative flex items-center">
               <span
-                className="cursor-pointer bg-transparent absolute -right-8"
+                className="absolute -right-8 cursor-pointer bg-transparent"
                 onClick={onClickHandler}
               >
                 &#x274C;
@@ -51,7 +51,7 @@ const IntroCard = ({ user }) => {
             <div className="my-1 flex">
               <i className="fa-solid fa-calendar-days"></i>
               <p className="mx-5">
-                Joined in {user && moment(user.createdAt).format('YYYY-MM-DD')}
+                Joined in {user && moment(user.createdAt).format("YYYY-MM-DD")}
               </p>
             </div>
             <div className="my-1 flex">
@@ -60,23 +60,9 @@ const IntroCard = ({ user }) => {
             </div>
             <div className="my-1 flex">
               <p className="font-semibold">BIO</p>
-              <p className="mx-5">{(user && user.bio) ?? 'BIO incoming'}</p>
+              <p className="mx-5">{(user && user.bio) ?? "BIO incoming"}</p>
             </div>
           </div>
-          {/* <div className="h-content my-5 w-72 rounded-lg bg-[#F5F5F5] p-3">
-            <h1 className="mb-4 text-xl font-semibold">Share Your Advice</h1>
-
-            <div className="my-1 flex cursor-pointer items-center">
-              <i className="fa-light fa-camera"></i>
-              <p className="mx-5" onClick={onClickHandler}>
-                Post Photo
-              </p>
-            </div>
-            <div className="flex items-center">
-              <i className="fa-regular fa-pen-to-square"></i>
-              <p className="mx-5">Write Review</p>
-            </div>
-          </div> */}
         </div>
         {<PlaceCard user={user} />}
       </div>

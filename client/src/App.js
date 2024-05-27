@@ -16,7 +16,6 @@ import EnterOtp from "./Pages/EnterOtp/EnterOtp";
 import Landing from "./Pages/HomePage/Landing";
 import Body from "./Pages/HotelList/Body";
 import Car from "./Pages/HotelList/Car";
-import CarBook from "./Pages/HotelList/CarBook";
 import CarDes from "./Pages/HotelList/CarDes";
 import Hotel from "./Pages/HotelList/Hotel";
 import HotelDes from "./Pages/HotelList/HotelDes";
@@ -68,7 +67,6 @@ function App() {
                     <Route path="cardetails" element={<CarDetails />} />
                     <Route path="cardashboard" element={<CarDashboard />} />
                   </Route>
-                  <Route path="/carbook" element={<CarBook />} />
                 </Routes>
               </FilterProvider>
             </UserLocationProvider>

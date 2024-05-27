@@ -1,63 +1,47 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { toast } from 'react-toastify';
-import { Cover, Logo, NoTextLogo } from '../../assets/img';
-import { baseUrl, doGet, doPost } from '../../Services/Axios';
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { baseUrl, doGet, doPost } from "../../Services/Axios";
 import {
   getUserEmailFromLocalStorage,
   getUserFromLocalStorage,
-} from '../../Services/Helpers';
-import UserProfile, { useProfileConsumer } from '../../Services/useProfile';
-import NavBar from '../Header/NavBar';
-import Footer from '../HomePage/Footer';
-import TopPages from '../HotelList/TopPage';
-import IntroCard from './IntroCard';
+} from "../../Services/Helpers";
+import UserProfile, { useProfileConsumer } from "../../Services/useProfile";
+import { Cover, Logo, NoTextLogo } from "../../assets/img";
+import NavBar from "../Header/NavBar";
+import Footer from "../HomePage/Footer";
+import TopPages from "../HotelList/TopPage";
+import IntroCard from "./IntroCard";
 
 const Profile = () => {
   const { user, setRefresh } = useProfileConsumer();
-  // const [user, setUser] = useState();
-  // const [refresh, setRefresh] = useState(false);
-
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     try {
-  //       console.log('====================================');
-  //       ('Please Enter here');
-  //       console.log('====================================');
-  //       const userres = await doGet(`/user`);
-  //       setUser(userres.data);
-  //     } catch (error) {}
-  //   };
-  //   fetchUser();
-  // }, [refresh]);
   const handleProfileSubmit = async (e) => {
     try {
-      console.log('====================================');
-      console.log('why ??');
-      console.log('====================================');
+      console.log("====================================");
+      console.log("why ??");
+      console.log("====================================");
       const form = new FormData();
-      form.append('profileImage', e.target.files[0]);
-      form.append('username', user.username);
-      const profile = await doPost('/user/profile', form);
+      form.append("profileImage", e.target.files[0]);
+      form.append("username", user.username);
+      const profile = await doPost("/user/profile", form);
       setRefresh((prev) => !prev);
     } catch (error) {
-      toast.error('Profile Change error');
+      toast.error("Profile Change error");
     }
   };
   const handleSubmitImage = async (e) => {
     try {
       const form = new FormData();
-      form.append('bioImage', e.target.files[0]);
-      form.append('username', user.username);
-      const profile = await doPost('/user/bio', form);
+      form.append("bioImage", e.target.files[0]);
+      form.append("username", user.username);
+      const profile = await doPost("/user/bio", form);
       setRefresh((prev) => !prev);
     } catch (error) {
-      toast.error('Profile Change error');
+      toast.error("Profile Change error");
     }
   };
-  console.log('====================================');
+  console.log("====================================");
   console.log(user && user.bioImage);
-  console.log('====================================');
+  console.log("====================================");
   return (
     <>
       <NavBar />
@@ -67,7 +51,7 @@ const Profile = () => {
             src={
               user && !!user.bioImage
                 ? `${baseUrl}/image/user/${user.bioImage}`
-                : 'https://i.pinimg.com/236x/a6/b4/11/a6b411674a6d6f8b6814e24e0d812364.jpg'
+                : "https://i.pinimg.com/236x/a6/b4/11/a6b411674a6d6f8b6814e24e0d812364.jpg"
             }
             alt="Cover"
             className="h-full w-full object-cover"
@@ -78,8 +62,8 @@ const Profile = () => {
           className="m-auto flex h-10 w-32 cursor-pointer items-center justify-center bg-white bg-opacity-60 text-black hover:bg-white"
         >
           <input
-            type={'file'}
-            className="text-lg hidden"
+            type={"file"}
+            className="hidden text-lg"
             id="input-file"
             onChange={handleSubmitImage}
           ></input>
@@ -101,7 +85,7 @@ const Profile = () => {
             />
           </label>
           <input
-            type={'file'}
+            type={"file"}
             className="hidden"
             id="profileImage"
             onChange={handleProfileSubmit}

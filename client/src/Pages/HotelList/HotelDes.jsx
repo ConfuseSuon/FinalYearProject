@@ -1,5 +1,3 @@
-import { Elements, PaymentElement } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import { Badge } from "antd";
 import axios from "axios";
 import KhaltiCheckout from "khalti-checkout-web";
@@ -119,8 +117,6 @@ const HotelDes = () => {
     }
   };
 
-  console.log(discount(), "filed");
-
   const khaltiCheckout = async () => {
     try {
       if (!room) return toast.error("please select room");
@@ -157,7 +153,7 @@ const HotelDes = () => {
         window.location.href = response?.data?.payment_url;
       }
     } catch (error) {
-      console.log(error, "khativai");
+      console.log(error);
     }
   };
 

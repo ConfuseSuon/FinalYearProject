@@ -69,32 +69,6 @@ const CarDes = () => {
     }
     setEndDate(e.target.value);
   };
-  const handleKhaltiPayment = async () => {};
-
-  // const handleBook = async (car) => {
-  //   try {
-  //     setShow((prev) => !prev);
-  //     await checkout.show({ amount: car.cost * 100 }).then(async () => {
-  //       if (!car) return toast.error("please select car");
-
-  //       const response = await doPost("/car/rentcar", {
-  //         car_id: car.car_id,
-  //         bookedDays: enumerateDaysBetweenDates(startDate, endDate),
-  //       });
-
-  //       toast.success("car Booked Sucessfully");
-  //       setRefresh((prev) => !prev);
-  //     });
-  //   } catch (error) {
-  //     if (
-  //       error.response &&
-  //       error.response.data &&
-  //       typeof error.response.data === "string"
-  //     ) {
-  //       toast.error(error.response.data);
-  //     }
-  //   }
-  // };
 
   const currentUrl = window.location.href;
   const searchParams = new URLSearchParams(currentUrl);
@@ -338,19 +312,6 @@ const CarDes = () => {
                   onChange={handleEndDate}
                 />
               </div>
-
-              {/* <div className="w-cotent top-14 right-[20rem] flex-col items-center justify-evenly rounded-xl bg-[#F5F5F5]">
-                <p className="text-lg font-semibold">Need</p>
-                <select
-                  onChange={onOptionChangeHandler}
-                  className="w-44 rounded border bg-white p-3 outline-none"
-                >
-                  <option className="">{value}</option>
-                  {options.map((option, index) => {
-                    return <option key={index}>{option}</option>;
-                  })}
-                </select>
-              </div> */}
             </div>
           </div>
           <div>

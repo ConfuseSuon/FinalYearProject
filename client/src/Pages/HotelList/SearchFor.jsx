@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import Switch from "./Switch";
 
 const SearchFor = () => {
   const router = useLocation();
